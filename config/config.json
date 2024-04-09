@@ -1,0 +1,27 @@
+{
+    "development": {
+      "username": "root",
+      "password": "@13579Ff",
+      "database": "ecommerce",
+      "host": "localhost",
+      "port": "3306",
+      "dialect": "mysql"
+    },
+    "test": {
+      "username": "root",
+      "password": "@13579Ff",
+      "database": "ecommerce",
+      "host": "localhost",
+      "port": "3306",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "root",
+      "password": "@13579Ff",
+      "database": "ecommerce",
+      "host": "localhost",
+      "port": "3306",
+      "dialect": "mysql"
+    }
+  }
+  
