@@ -3,6 +3,7 @@ import { DataTypes } from "sequelize";
 import { UserM } from "../user/user.model";
 import { PaymentPixM } from "./payment-pix/payment-pix.model";
 import { ProductOrderM } from "./product-order/product-order.model";
+import { PaymentCardM } from "./payment-card/payment-card.model";
 
 const PaymentM = sequelize.define(
   "Payment",
@@ -69,6 +70,15 @@ PaymentM.hasMany(PaymentPixM, {
 });
 
 PaymentPixM.belongsTo(PaymentM, {
+  foreignKey: "order_id",
+});
+
+PaymentM.hasMany(PaymentCardM, {
+  foreignKey: "order_id",
+  as: "payment_card",
+});
+
+PaymentCardM.belongsTo(PaymentM, {
   foreignKey: "order_id",
 });
 

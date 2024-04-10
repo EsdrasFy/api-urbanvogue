@@ -1,3 +1,4 @@
+import { PaymentCardM } from "../../../models/payment/payment-card/payment-card.model";
 import { PaymentPixM } from "../../../models/payment/payment-pix/payment-pix.model";
 import { PaymentM } from "../../../models/payment/payment.model";
 import { PaymentFindI } from "./types";
@@ -7,7 +8,7 @@ async function findPaymentPix({
   order_id,
   payment_id,
 }: {
-  method: "pix" | "credit" | "debit" | "bank";
+  method: "pix" | "card" | "bank";
   order_id: number;
   payment_id: number;
 }): Promise<PaymentFindI | null> {
@@ -23,7 +24,15 @@ async function findPaymentPix({
         },
       });
     }
-
+    if (method === "card") {
+      includeList.push({
+        model: PaymentCardM,
+        as: "payment_card",
+        where: {
+          payment_id: payment_id,
+        },
+      });
+    }
     const payments: PaymentFindI | null = (await PaymentM.findOne({
       include: includeList,
       where: {

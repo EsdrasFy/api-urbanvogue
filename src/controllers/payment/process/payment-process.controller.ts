@@ -1,10 +1,6 @@
 require("dotenv").config();
-import { Payment, MercadoPagoConfig } from "mercadopago";
-import { Request, Response, response } from "express";
-
-import { CardM } from "../../../models/user/card/card.model";
+import { Request, Response } from "express";
 import { UserM } from "../../../models/user/user.model";
-import { CardI } from "../../../interfaces/card.interface";
 import { VerifyCoupon } from "../../../utils/verify-coupon";
 import { createOrder } from "../../../utils/payment/create-order/create-order.util";
 import { createProductOrder } from "../../../utils/payment/product-order/product-order.utils";
@@ -12,26 +8,11 @@ import { UserI } from "../../../interfaces/user.interface";
 import { processPix } from "../../../service/payment/process-pix/process-pix.service";
 import { createPaymentPixOrder } from "../../../utils/payment/payment-pix/payment-pix.utils";
 import { MPPixResponseData } from "../../../service/payment/process-pix/types";
-import {
-  processCard,
-  tokenCreate,
-} from "../../../service/payment/process.card/payment-card.utils";
+import { processCard } from "../../../service/payment/process.card/payment-card.utils";
 import { VerifyCard } from "../../../utils/verify-card";
-
-import { v4 as uuidv4 } from "uuid";
 import { createPaymentCardOrder } from "../../../utils/payment/payment-card/payment-card.utils";
 
-const access_token = process.env.ACCESS_TOKEN || " ";
-if (!access_token) {
-  console.log("Public token is not defined!");
-}
-
-const client = new MercadoPagoConfig({
-  accessToken:
-    "TEST-5565133071050132-021318-483ffb67b39c4695bb7bc30752123c4d-453483656",
-});
-const pay = new Payment(client);
-
+("http://localhost:3000/checkout/approve/credit_card/3/1322342309");
 /*
  ** add coupon and status of order na tabela orders
  ** arrumar a parada no coupon de quantity * price

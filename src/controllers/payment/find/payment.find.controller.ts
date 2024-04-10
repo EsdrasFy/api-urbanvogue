@@ -5,8 +5,7 @@ async function findPayment(req: Request, res: Response) {
   const { order_id, payment_id, method } = req.params;
   if (
     method !== "pix" &&
-    method !== "credit" &&
-    method !== "debit" &&
+    method !== "card" &&
     method !== "bank"
   ) {
     return res.status(401).json({ msg: "Method invalid" });
