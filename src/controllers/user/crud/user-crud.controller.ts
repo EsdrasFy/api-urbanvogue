@@ -36,6 +36,9 @@ async function updateUser(req: Request, res: Response) {
     gender,
     cpf,
   } = req.body;
+
+  console.log(profile_img);
+  
   if (!username || username.length < 3) {
     return res.status(401).json({ msg: "Incorrect user pattern!" });
   }
@@ -58,12 +61,6 @@ async function updateUser(req: Request, res: Response) {
         cpf: cpf,
       },
     })) as UserI;
-
-    let image: string;
-
-    if (!profile_img) {
-      image = user.profile_img;
-    }
 
     if (existingCPF && existingCPF.user_id !== user.user_id) {
       return res.status(400).json({ msg: "CPF is already in use." });
@@ -94,7 +91,7 @@ async function updateUser(req: Request, res: Response) {
         username: username,
         fullname: fullname,
         email: email,
-        profile_img: profile_img,
+        profile_img: profile_img || user.profile_img,
         password_hash: user.password_hash,
         date_of_birth: birthdate,
         phone: phone,

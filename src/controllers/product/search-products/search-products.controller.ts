@@ -285,13 +285,11 @@ async function productSearch(req: Request, res: Response) {
           as: "images",
           attributes: ["url"],
         },
-      ]
+      ],
     })) as ProductI[];
-
     if (products.length > 0) {
       return res.status(200).json({ filters, products });
     }
-    throw new Error();
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });
