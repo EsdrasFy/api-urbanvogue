@@ -1,11 +1,11 @@
 import { Sequelize } from "sequelize";
 require("dotenv").config();
 const sequelize = new Sequelize(
-  process.env.DB_NAME || "",
-  process.env.DB_USER || "",
-  process.env.DB_PASSWORD || "",
+  "railway",
+  "root",
+  "DnYQQjCZnCskNmMswBIKdxYdipregdFM",
   {
-    host: process.env.DB_HOST || "",
+    host: "viaduct.proxy.rlwy.net",
     port: 34331,
     dialect: "mysql",
     dialectModule: require('mysql2')
