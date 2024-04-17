@@ -1,10 +1,10 @@
-USE ecommerce;
-select * from users;
-truncate users;
+use railway;
+
 CREATE TABLE roles (
     id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     role_nome VARCHAR(100) NOT NULL
 );
+
 INSERT INTO roles (role_nome) 
 VALUES 
 ("Client"),
@@ -15,7 +15,7 @@ VALUES
 ("Accounting and Finance"),
 ("Admin"),
 ("Owner");
-select * from users;
+
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     google_id VARCHAR(255) UNIQUE,
@@ -34,10 +34,6 @@ CREATE TABLE users (
     cpf VARCHAR(14) UNIQUE,
     created_at DATETIME DEFAULT NOW() NOT NULL
 );
-DESCRIBE users;
--- INSERT INTO users (fullname, username, email, password_hash, date_of_birth, address, phone, shopping, gender, cpf, cards, created_at, messages, classe)
--- VALUES ('John Doe', 'john_doe', 'john@example.com', 'hashed_password', '1990-01-01', '123 Main St', '123456789', 1, 'Male', '12345678901', 2, '2022-01-01 12:00:00', 1, 'Class A');
--- describe users;
 
 CREATE TABLE notify_messages (
     notify_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -45,9 +41,6 @@ CREATE TABLE notify_messages (
     message VARCHAR(255),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
--- INSERT INTO notify_messages (user_id, message)
--- VALUES (1, 'You have a new message!');
--- SELECT * FROM notify_messages WHERE user_id = 1;
 
 CREATE TABLE user_address(
 	address_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -61,8 +54,7 @@ CREATE TABLE user_address(
     reference VARCHAR(170),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
--- verified email and phone
-select * from user_cards;
+
 CREATE TABLE user_cards (
     card_id INT PRIMARY KEY AUTO_INCREMENT,
     type VARCHAR(12) NOT NULL,
@@ -76,27 +68,13 @@ CREATE TABLE user_cards (
     cvv VARCHAR(4) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
-ALTER TABLE user_cards
-MODIFY COLUMN type VARCHAR(12) NOT NULL;
 
-select * from user_cards;
--- INSERT INTO credit_cards (card_number, card_holder_name, expiration_date, cvv, billing_address, is_default, user_id) 
--- VALUES 
--- ('1234 5678 9101 1120', 'Carlos Miguel', '2029-12-01', '123', 'São Paulo, SP', 1, 1);
--- SELECT * FROM credit_cards WHERE user_id = 1;
 CREATE TABLE users_roles (
     user_id INT,
     role_id INT UNSIGNED,
     FOREIGN KEY (role_id) REFERENCES roles(id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
--- INSERT INTO users_roles (user_id, role_id) VALUES (2, 3);
--- describe  roles;
-
--- SELECT users_roles.user_id, users_roles.role_id, users.username, roles.role_name
--- FROM users_roles
--- JOIN users ON users_roles.user_id = users.user_id
--- JOIN roles ON users_roles.role_id = roles.id;
 
 CREATE TABLE product (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -124,20 +102,21 @@ CREATE TABLE product_images (
     url VARCHAR(255),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
+
 CREATE TABLE colors (
     color_id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT,
-    name_color VARCHAR(15),
+    name_color VARCHAR(90),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
--- aumentar o tamanho da name_color
 CREATE TABLE product_flags (
     flag_id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT,
     flag VARCHAR(50),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
+
 CREATE TABLE product_details (
     detail_id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT,
@@ -150,6 +129,7 @@ CREATE TABLE product_sizes (
     size VARCHAR(50),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
+
 CREATE TABLE promotions (
     promotion_id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT,
@@ -169,11 +149,6 @@ CREATE TABLE coupons (
     start_date DATE NOT NULL,
     end_date DATE NOT NULL
 );	
--- INSERT INTO promotions (product_id, discount_percentage, start_date, end_date)
--- VALUES
---    (1, 10, '2023-01-01', '2023-02-01'),  -- Promoção para o produto com product_id = 1
---   (2, 20, '2023-03-15', '2023-04-15'),  -- Promoção para outro produto com product_id = 2
---    (1, 30, '2023-05-01', '2023-06-01');  -- Outra promoção para o produto com product_id = 1
 
 CREATE TABLE comments (
     comment_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -188,31 +163,14 @@ CREATE TABLE comments (
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
+
 CREATE TABLE comments_urls(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	comment_id INT NOT NULL,
     url VARCHAR(255),
 	FOREIGN KEY (comment_id) REFERENCES comments(comment_id)
 );
- -- TRUNCATE TABLE product;
-	
--- SELECT * FROM SequelizeMeta;
-
-/*gambiarra
-
-
-ALTER TABLE product ADD classe VARCHAR(255);
-ALTER TABLE users
-DROP COLUMN classe;
-
-*/
-
--- INSERT INTO product_images (product_id, url)
--- VALUES
---    (2, "calca.jpg"),
---    (2, "calca2.jpg");
-
-
+ 
 CREATE TABLE user_order(
     order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -226,7 +184,7 @@ CREATE TABLE user_order(
     state VARCHAR(30) NOT NULL,
     created_at DATETIME DEFAULT NOW()
 );
-select * from payment_pix;
+
 CREATE TABLE payment_pix (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
@@ -278,20 +236,3 @@ CREATE TABLE product_order(
 	FOREIGN KEY (product_id) REFERENCES product(id),
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
-select * from user_order;
-
-INSERT INTO buy_product(user_buy, product_buy , guarantee, variation,payment_method , shipping_address, paid, created_at) VALUES 
-(4, 3, " 1 Mês", "Estampa 1", "Credit Card", "São Paulo, SP", 0, now());
-
--- criar logica para criar pagamento, por id do pagamento na rota client, criar o frontend, melhorar o backend, criar os webhooks para atualizar os pagamentos
-
-ALTER TABLE users ADD FOREIGN KEY (shopping) REFERENCES buy_product(solicitation_id);
--- mysqldump -u root -p loja_virtual_atacado > /home/aylton/backup.sql
--- mysql -u root -p teste-restore < /home/aylton/backup.sql
--- Inserir produtos OK
--- Relacionar imagens aos produtos OK
--- Criação de Usuarios OK
--- Relacionar cartões aos usuarios OK
--- Criado Cargos OK
--- Relação  Cargos e Usuarios 	OK
--- comentarios de usuarios sobre produtos OK
