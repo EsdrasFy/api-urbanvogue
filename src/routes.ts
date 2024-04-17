@@ -1,6 +1,6 @@
 // src/routes.ts
 
-import express from "express";
+import express, { Request, Response } from "express";
 require("dotenv").config();
 const routes = express.Router();
 import {
@@ -46,6 +46,7 @@ import { register } from "./controllers/user/register/register.controller";
 import { createUserOrder } from "./controllers/teste";
 import { findPayment } from "./controllers/payment/find/payment.find.controller"
 import { paymentMiddle } from "./middlewares/payment.middleware";
+
 // Rotas para o usuário
 routes.put("/user/update", updateUser);
 routes.delete("/user/delete/:id", deleteUser);
@@ -93,6 +94,9 @@ routes.get("/scraping/:content", scraping);
 routes.post("/comment/create", createComment);
 routes.get("/comments/:id", comments);
 
+routes.get("/", (req:Request, res:Response) =>{
+  res.status(200).send("Welcome urban vogue")
+})
 
 export { routes };
 
