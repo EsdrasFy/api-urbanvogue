@@ -278,7 +278,7 @@ CREATE TABLE product_order(
 	FOREIGN KEY (product_id) REFERENCES product(id),
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
-select * from payment_card;
+select * from user_order;
 
 INSERT INTO buy_product(user_buy, product_buy , guarantee, variation,payment_method , shipping_address, paid, created_at) VALUES 
 (4, 3, " 1 Mês", "Estampa 1", "Credit Card", "São Paulo, SP", 0, now());
