@@ -1,12 +1,12 @@
 import { Sequelize } from "sequelize";
 require("dotenv").config();
 const sequelize = new Sequelize(
-  "railway",
+  "ecommerce",
   "root",
-  "DnYQQjCZnCskNmMswBIKdxYdipregdFM",
+  "@13579Ff",
   {
-    host: "viaduct.proxy.rlwy.net",
-    port: 34331,
+    host: "localhost",
+    port: 3306,
     dialect: "mysql",
     dialectModule: require('mysql2')
   }

@@ -46,6 +46,7 @@ import { register } from "./controllers/user/register/register.controller";
 import { createUserOrder } from "./controllers/teste";
 import { findPayment } from "./controllers/payment/find/payment.find.controller"
 import { paymentMiddle } from "./middlewares/payment.middleware";
+import { defaultRoute } from "./controllers/default/default.controller";
 
 // Rotas para o usuário
 routes.put("/user/update", updateUser);
@@ -94,9 +95,7 @@ routes.get("/scraping/:content", scraping);
 routes.post("/comment/create", createComment);
 routes.get("/comments/:id", comments);
 
-routes.get("/", (req:Request, res:Response) =>{
-  res.status(200).send("Welcome urban vogue")
-})
+routes.get("/", defaultRoute)
 
 export { routes };
 
