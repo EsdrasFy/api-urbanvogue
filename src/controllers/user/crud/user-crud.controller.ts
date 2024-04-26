@@ -16,7 +16,6 @@ import { UserI } from "../../../interfaces/user.interface";
       if (!user) {
       return res.status(404).json({ msg: "User not found!" });
     }
-    console.log(user);
     res
     .status(200)
     .json({ user, status: 200, id: user.user_id, name: user.username });
@@ -37,8 +36,7 @@ async function updateUser(req: Request, res: Response) {
     cpf,
   } = req.body;
 
-  console.log(profile_img);
-  
+  // simple validation
   if (!username || username.length < 3) {
     return res.status(401).json({ msg: "Incorrect user pattern!" });
   }
@@ -48,24 +46,34 @@ async function updateUser(req: Request, res: Response) {
   if (!email) {
     return res.status(401).json({ msg: "Email required!" });
   }
+  if (!user_id) {
+    return res.status(401).json({ msg: "User ID required!" });
+  }
   
   try {
+
+    // existing user
     const user = (await UserM.findOne({
       where: {
         user_id: user_id,
       },
     })) as UserI;
 
-    const existingCPF = (await UserM.findOne({
-      where: {
-        cpf: cpf,
-      },
-    })) as UserI;
+    // existing CPF
+    if(cpf){
 
-    if (existingCPF && existingCPF.user_id !== user.user_id) {
-      return res.status(400).json({ msg: "CPF is already in use." });
+      const existingCPF = (await UserM.findOne({
+        where: {
+          cpf: cpf,
+        },
+      })) as UserI;
+      
+      if (existingCPF && existingCPF.user_id !== user.user_id) {
+        return res.status(400).json({ msg: "CPF is already in use." });
+      }
     }
 
+     // existing Email
     const existingEmail = (await UserM.findOne({
       where: {
         email: email,
@@ -76,6 +84,7 @@ async function updateUser(req: Request, res: Response) {
       return res.status(400).json({ msg: "Email is already in use." });
     }
 
+    // existing Username
     const existingUsername = (await UserM.findOne({
       where: {
         username: username,
@@ -86,6 +95,7 @@ async function updateUser(req: Request, res: Response) {
       return res.status(400).json({ msg: "Username is already in use." });
     }
 
+    // update user
     await UserM.update(
       {
         username: username,
@@ -104,13 +114,16 @@ async function updateUser(req: Request, res: Response) {
     );
     const updatedUser = await UserM.findOne({ where: { user_id: user_id } });
     
-    return res.status(200).json({ msg: "Successful update!", user: updatedUser });
-  } catch (error) {
-    console.log(error);
+    // send response
+    return res.status(200).json({ msg: "Successfull update!", user: updatedUser });
 
-    return res.status(500).json({ msg: "Error updating user!", user: null });
+  } catch (error: any) {
+    console.log(error);
+    
+    return res.status(500).json({ msg: error.message ||  "Error updating user!", user: null });
   }
 }
+
 async function deleteUser(req: Request, res: Response) {
   const id = req.params.id;
 

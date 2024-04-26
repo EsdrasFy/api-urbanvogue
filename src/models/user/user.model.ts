@@ -2,7 +2,6 @@ import sequelize from "../../config/db.config";
 import { DataTypes } from "sequelize";
 import {AddressM} from "./address/adress.model";
 import {CardM} from "./card/card.model";
-
 const UserM = sequelize.define(
   "User",
   {

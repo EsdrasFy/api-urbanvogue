@@ -43,7 +43,6 @@ import {
 import { credentialMiddle } from "./middlewares/credential.middleware";
 import { oauthMiddle } from "./middlewares/oauth.middleware";
 import { register } from "./controllers/user/register/register.controller";
-import { createUserOrder } from "./controllers/teste";
 import { findPayment } from "./controllers/payment/find/payment.find.controller"
 import { paymentMiddle } from "./middlewares/payment.middleware";
 import { defaultRoute } from "./controllers/default/default.controller";
@@ -77,8 +76,6 @@ routes.get("/card/:id", readCard);
 //payment
 routes.post("/payment/:method", paymentMiddle);
 routes.get("/payment/find/:method/:order_id/:payment_id", findPayment)
-
-routes.post("/createUserOrder", createUserOrder);
 
 // Rotas para produtos
 routes.post("/product/new", createProduct);
