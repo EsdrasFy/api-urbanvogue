@@ -235,7 +235,7 @@ function extrairPalavrasChave(descricao: string): string[] {
       await page.goto(`${urlClone}${searchFor}`);
       console.log("Fui para URL");
   
-      const links = await page.$$eval(".ZahOa > a", (el) =>
+      const links = await page.$$eval(".gjhBdY > a", (el) =>
         el.map((link) => link.href)
       );
   
@@ -252,20 +252,20 @@ function extrairPalavrasChave(descricao: string): string[] {
   }
   async function processProductLink(link: string, page: puppeteer.Page) {
     await page.goto(link);
-    await page.waitForSelector(".sc-cLQEGU .ctqnXE.ctqnXE");
-    await page.waitForSelector(".sc-hCaUpS > div .sc-fZwumE.caYnnT > img");
-    await page.waitForSelector(".euhAJe h1");
-    await page.waitForSelector(".llynDC");
-    await page.waitForSelector(".sc-jAaTju.sc-gPEVay");
-    await page.waitForSelector(".sc-cLQEGU.sc-bAeIUo.cUKWJR > .sc-gqPbQI.disRVL p.sc-dxgOiQ.iIHmSY");
+    await page.waitForSelector(".frDydV .ggBivd > .gHwVao");
+    await page.waitForSelector(".sc-bvTASY div div img");
+    await page.waitForSelector("h1");
+    await page.waitForSelector(".bWeRxa");
+    await page.waitForSelector(".sc-jAaTju.cRBfqT");
+    await page.waitForSelector(".sc-kgoBCf.jeIRcN");
     // titulo
     const OldTitle = await page.$eval(
-      ".euhAJe h1",
+      "h1",
       (element) => element.innerHTML
     );
     const title = await translateText(OldTitle, "en");
     // preço
-    const preco = await page.$eval(".sc-jAaTju.sc-gPEVay", (element) => element.innerHTML);
+    const preco = await page.$eval(".sc-jAaTju.cRBfqT", (element) => element.innerHTML);
     const formattedPrice = parseFloat(
       preco
         ?.replace(/&nbsp;|\s|[^\d,.]/g, "")
@@ -287,28 +287,27 @@ function extrairPalavrasChave(descricao: string): string[] {
     // marca
     const brand = link.split("/")[3];
     // tamanhos
-    const sizes = await page.$$eval(".llynDC", (el) =>
+    const sizes = await page.$$eval(".bWeRxa", (el) =>
       el.map((size) => size.innerHTML)
     );
     const regex: RegExp = /\s(\d+)x/i;
     // descrição
     
     const OldSummary = await page.$eval(
-      ".sc-cLQEGU .ctqnXE.ctqnXE",
+      ".frDydV .ggBivd > .gHwVao",
       (element) => element.innerHTML
     );
-    console.log(OldSummary);
     
     const summary = await translateText(OldSummary, "en");
     // palavras chaves
     const flags: string[] = extrairPalavrasChave(summary);
     flags.push(brand, category);
     // imagens
-    const images = await page.$$eval(".sc-hCaUpS > div .sc-fZwumE.caYnnT > img", (el) =>
+    const images = await page.$$eval(".sc-bvTASY div div img", (el) =>
       el.map((img) => img.src)
     );
     // detalhes
-    const detailsPT = await page.$$eval(".sc-cLQEGU.sc-bAeIUo.cUKWJR > .sc-gqPbQI.disRVL p.sc-dxgOiQ.iIHmSY", (el) =>
+    const detailsPT = await page.$$eval(".sc-kgoBCf.jeIRcN", (el) =>
       el.map((p) => p.innerHTML)
     );
     console.log(detailsPT);
