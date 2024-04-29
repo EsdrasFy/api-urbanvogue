@@ -21,6 +21,9 @@ interface ProductOrderI {
     product_id: number;
     user_id: number;
     color: string;
+    title: string;
+    price:string;
+    image:string;
     size: string;
     quantity: number;
 }

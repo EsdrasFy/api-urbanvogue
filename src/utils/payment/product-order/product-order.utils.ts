@@ -29,13 +29,15 @@ async function createProductOrder({
         },
       };
     }
-
     for (const product of products) {
       await ProductOrderM.create({
         order_id,
         product_id: product.id,
         user_id,
         color: product.color,
+        image: product.image,
+        price: product.price,
+        title: product.title,
         size: product.size,
         quantity: product.quantity,
       });

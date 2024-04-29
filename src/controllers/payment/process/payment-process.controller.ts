@@ -8,7 +8,7 @@ import { UserI } from "../../../interfaces/user.interface";
 import { processPix } from "../../../service/payment/process-pix/process-pix.service";
 import { createPaymentPixOrder } from "../../../utils/payment/payment-pix/payment-pix.utils";
 import { MPPixResponseData } from "../../../service/payment/process-pix/types";
-import { processCard } from "../../../service/payment/process.card/payment-card.utils";
+import { processCard } from "../../../service/payment/process.card/payment-card.service";
 import { VerifyCard } from "../../../utils/verify-card";
 import { createPaymentCardOrder } from "../../../utils/payment/payment-card/payment-card.utils";
 
@@ -51,7 +51,6 @@ async function ControllerCard(req: Request, res: Response) {
       address_id,
       payment_method,
       user_id,
-      coupon: coupon || null,
     });
     if (order.data.status !== 201) {
       return res.status(order.data.status).json(order.data.msg);
@@ -77,6 +76,10 @@ async function ControllerCard(req: Request, res: Response) {
       installments: installments || 1,
       withDiscount: verify_coupon.data.withDiscount || null,
       withoutDiscount: verify_coupon.data.withoutDiscount!,
+      coupon: verify_coupon.data.code || null,
+      discount: verify_coupon.data.discount || null, 
+      freight_type: "SEDEX",
+      freight_amount: 0.00,
     });
     if (processedCard.status !== 201) {
       return res.status(processedCard.status).json(processedCard.msg);
@@ -120,7 +123,7 @@ async function ControllerPix(req: Request, res: Response) {
     if (verify_data.data.status !== 200) {
       return res.status(verify_data.data.status).json(verify_data.data.msg);
     }
-
+    
     const user: UserI | null = (await UserM.findByPk(user_id)) as UserI | null;
     if (!user) {
       return res.status(404).json({ msg: "User not found" });
@@ -129,8 +132,7 @@ async function ControllerPix(req: Request, res: Response) {
     const order = await createOrder({
       address_id,
       payment_method,
-      user_id,
-      coupon: coupon || null,
+      user_id
     });
     if (order.data.status !== 201) {
       return res.status(order.data.status).json(order.data.msg);
@@ -150,10 +152,14 @@ async function ControllerPix(req: Request, res: Response) {
       email: user.email || "",
       fullname: user.fullname || "",
       token,
+      coupon: verify_data.data.code || null,
+      discount: verify_data.data.discount || null, 
+      freight_type: "SEDEX",
+      freight_amount: 0.00,
       withDiscount: verify_data?.data?.withDiscount || null,
       withoutDiscount: verify_data?.data?.withoutDiscount!,
     });
-
+    
     if (processedPix.data.status !== 201) {
       return res.status(processedPix.data.status).json(processedPix.data.msg);
     }
@@ -178,7 +184,6 @@ async function ControllerPix(req: Request, res: Response) {
       payment_id: data_info_pix.payment_id,
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ msg: "Error processing payment" });
   }
 }

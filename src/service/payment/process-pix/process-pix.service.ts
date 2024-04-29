@@ -11,6 +11,10 @@ async function processPix({
   token,
   withDiscount,
   withoutDiscount,
+  coupon,
+  discount,
+  freight_amount,
+  freight_type,
 }: processPixProps): Promise<processPixRes> {
   try {
     const body = {
@@ -56,6 +60,10 @@ async function processPix({
       currency: response.data.currency_id,
       date_created: response.data.date_created,
       date_of_expiration: response.data.date_of_expiration,
+      coupon:coupon,
+      discount: discount, 
+      freight_type: freight_type,
+      freight_amount: freight_amount,
     };
 
     return {

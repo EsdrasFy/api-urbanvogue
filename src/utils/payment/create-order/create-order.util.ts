@@ -8,7 +8,6 @@ async function createOrder({
   user_id,
   payment_method,
   address_id,
-  coupon
 }: createOrderProps): Promise<createOrderRes> {
   if (!user_id) {
     return {
@@ -46,8 +45,8 @@ async function createOrder({
     payment_method,
     street: address?.street,
     number: address?.number,
-    coupon: coupon || null,
     cep: address?.cep,
+    status: "pending",
     city: address?.city,
     state: address?.state,
   })) as any;

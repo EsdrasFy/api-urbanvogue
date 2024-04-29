@@ -10,5 +10,4 @@ export interface createOrderProps {
   user_id: number;
   payment_method: string;
   address_id: number;
-  coupon?: string | null
 }

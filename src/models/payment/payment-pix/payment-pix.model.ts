@@ -39,6 +39,22 @@ const PaymentPixM = sequelize.define(
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
+    discount:{
+      type: DataTypes.DECIMAL(10, 2),
+      defaultValue: 0.00
+    },
+    coupon:{
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    freight_type:{
+      type: DataTypes.DECIMAL(10, 2),
+      defaultValue: 0.00
+    },
+    freight_amount:{
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     status: {
       type: DataTypes.STRING,
       allowNull: false,

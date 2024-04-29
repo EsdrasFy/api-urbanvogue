@@ -1,4 +1,5 @@
-use railway;
+create database ecommerce;
+use ecommerce;
 
 CREATE TABLE roles (
     id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -16,7 +17,8 @@ VALUES
 ("Admin"),
 ("Owner");
 
-CREATE TABLE users (er_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE users (
+	user_id INT AUTO_INCREMENT PRIMARY KEY,
     google_id VARCHAR(255) UNIQUE,
     facebook_id VARCHAR(255) UNIQUE,
     github_id VARCHAR(255) UNIQUE,
@@ -33,7 +35,7 @@ CREATE TABLE users (er_id INT AUTO_INCREMENT PRIMARY KEY,
     cpf VARCHAR(14) UNIQUE,
     created_at DATETIME DEFAULT NOW() NOT NULL
 );
-
+select * from users;
 CREATE TABLE notify_messages (
     notify_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -94,6 +96,8 @@ CREATE TABLE product (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
     created_at DATETIME DEFAULT NOW() NOT NULL
 );
+
+select * from product;
 
 CREATE TABLE product_images (
     image_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -178,7 +182,7 @@ CREATE TABLE user_order(
 	street 	VARCHAR(100) NOT NULL,
     number INT NOT NULL,
     cep VARCHAR(9) NOT NULL,
-    coupon VARCHAR(100),
+    status VARCHAR(25) DEFAULT'pending',
     city VARCHAR(25) NOT NULL,
     state VARCHAR(30) NOT NULL,
     created_at DATETIME DEFAULT NOW()
@@ -193,6 +197,8 @@ CREATE TABLE payment_pix (
     qr_code TEXT NOT NULL,
     ticket_url TEXT,
     transaction_amount DECIMAL(10, 2) NOT NULL,
+	discount DECIMAL(10,2) DEFAULT(0),
+    coupon VARCHAR(25),
     status VARCHAR(25) NOT NULL,
     status_detail VARCHAR(25) NOT NULL,
     date_approved DATETIME,
@@ -208,6 +214,8 @@ CREATE TABLE payment_card (
     payment_id BIGINT NOT NULL,
     issuer_id VARCHAR(100) NOT NULL,
     transaction_amount DECIMAL(10, 2) NOT NULL,
+    discount DECIMAL(10,2) DEFAULT(0),
+    coupon VARCHAR(25),
     installments INT NOT NULL,
     installment_amount DECIMAL(10,2) NOT NULL,
     cpf_holder VARCHAR(14) NOT NULL,
@@ -223,11 +231,15 @@ CREATE TABLE payment_card (
     date_of_expiration DATETIME,
     FOREIGN KEY (order_id) REFERENCES user_order(order_id)
 );
+
 CREATE TABLE product_order(
 	product_order INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	order_id INT NOT NULL ,
 	product_id INT NOT NULL,
     user_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    price VARCHAR(10) NOT NULL,
     color VARCHAR(100),
     size VARCHAR(100),
     quantity INT NOT NULL,

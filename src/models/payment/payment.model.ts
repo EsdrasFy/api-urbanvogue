@@ -4,6 +4,7 @@ import { UserM } from "../user/user.model";
 import { PaymentPixM } from "./payment-pix/payment-pix.model";
 import { ProductOrderM } from "./product-order/product-order.model";
 import { PaymentCardM } from "./payment-card/payment-card.model";
+import { flattenDiagnosticMessageText } from "typescript";
 
 const PaymentM = sequelize.define(
   "Payment",
@@ -29,12 +30,13 @@ const PaymentM = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    coupon:{
-      type: DataTypes.INTEGER,
-    },
     cep: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    status:{
+      type: DataTypes.STRING,
+      defaultValue: "pending"
     },
     city: {
       type: DataTypes.STRING,

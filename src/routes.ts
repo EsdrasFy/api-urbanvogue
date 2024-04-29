@@ -46,6 +46,7 @@ import { register } from "./controllers/user/register/register.controller";
 import { findPayment } from "./controllers/payment/find/payment.find.controller"
 import { paymentMiddle } from "./middlewares/payment.middleware";
 import { defaultRoute } from "./controllers/default/default.controller";
+import { getOrderDetails, getOrders } from "./controllers/user/order/order.controller";
 
 // Rotas para o usuário
 routes.put("/user/update", updateUser);
@@ -64,6 +65,9 @@ routes.post("/address/new", createAddress);
 routes.put("/address/edit", updateAddress);
 routes.delete("/address/delete", deleteAddress);
 routes.get("/address/:id", readAddress);
+
+routes.get("/orders/:id", getOrders)
+routes.get("/order/:user_id/:order_id", getOrderDetails)
 
 // cupons
 routes.post("/coupon/create", createCoupons);

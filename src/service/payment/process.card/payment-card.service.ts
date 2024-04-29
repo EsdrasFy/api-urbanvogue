@@ -3,8 +3,7 @@ import { CardI } from "../../../interfaces/card.interface";
 import axios from "axios";
 import { Payment, MercadoPagoConfig } from "mercadopago";
 import { v4 as uuidv4 } from "uuid";
-import { MPCardResponse } from "./types";
-
+import { MPCardResponse, processCardProps, tokenCreateProps } from "./types";
 const access_token = process.env.ACCESS_TOKEN || " ";
 if (!access_token) {
   console.log("Public token is not defined!");
@@ -28,12 +27,7 @@ async function tokenCreate({
   withoutDiscount,
   withDiscount,
   installments,
-}: {
-  card: CardI;
-  withoutDiscount: number;
-  withDiscount: number | null;
-  installments: number;
-}): Promise<tokenCreateRes> {
+}: tokenCreateProps): Promise<tokenCreateRes> {
   if (!card) {
     return {
       data: {
@@ -117,14 +111,11 @@ async function processCard({
   withDiscount,
   withoutDiscount,
   email,
-}: {
-  card: CardI;
-  withoutDiscount: number;
-  withDiscount: number | null;
-  installments: number;
-  email: string;
-}): Promise<processCardRes> {
-  
+  coupon,
+  discount,
+  freight_amount,
+  freight_type,
+}: processCardProps): Promise<processCardRes> {
   const {
     data: { msg, status, token },
   } = await tokenCreate({
@@ -168,7 +159,9 @@ async function processCard({
       issuer_id: response.issuer_id!,
       transaction_amount: response.transaction_amount!,
       installments: response.installments!,
-      installment_amount: response.transaction_details?.installment_amount || response.transaction_amount!,
+      installment_amount:
+        response.transaction_details?.installment_amount ||
+        response.transaction_amount!,
       cpf_holder: response.card?.cardholder?.identification?.number!,
       name_holder: response.card?.cardholder?.name!,
       last_digits: response.card?.last_four_digits!,
@@ -177,6 +170,10 @@ async function processCard({
       status: response.status!,
       status_detail: response.status_detail!,
       date_approved: new Date(response.date_approved!),
+      coupon:coupon,
+      discount: discount, 
+      freight_type: freight_type,
+      freight_amount: freight_amount,
       currency: response.currency_id!,
       date_created: new Date(response.date_created!),
       date_of_expiration: new Date(response.date_of_expiration!),

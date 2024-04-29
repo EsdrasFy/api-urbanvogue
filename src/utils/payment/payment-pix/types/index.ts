@@ -18,6 +18,10 @@ export interface createPaymentPixOrderProps {
     status_detail: string;
     date_approved: Date | null;
     currency: string;
+    coupon: string | null;
+    discount: number | null;
+    freight_type: string | null;
+    freight_amount: number | null;
     date_created: Date | null;
     date_of_expiration: Date | null;
   };

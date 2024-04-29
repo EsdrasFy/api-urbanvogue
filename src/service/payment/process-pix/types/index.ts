@@ -4,6 +4,10 @@ export interface processPixProps {
   fullname: string;
   token: string;
   withDiscount: number | null;
+  coupon: string | null;
+  discount: number | null;
+  freight_type: string | null;
+  freight_amount: number | null;
   withoutDiscount: number;
 }
 
@@ -20,6 +24,10 @@ export interface MPPixResponseData {
   currency: string;
   date_created: Date | null;
   date_of_expiration: Date | null;
+  coupon: string | null;
+  discount: number | null;
+  freight_type: string | null;
+  freight_amount: number | null;
 }
 
 export interface processPixRes {

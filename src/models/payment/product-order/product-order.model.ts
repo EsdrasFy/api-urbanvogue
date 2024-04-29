@@ -26,6 +26,18 @@ const ProductOrderM = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    price: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     size: {
       type: DataTypes.STRING,
       allowNull: false,

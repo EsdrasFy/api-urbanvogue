@@ -24,6 +24,10 @@ interface PaymentPix {
     status_detail: string;
     date_approved?: Date;
     currency: string;
+    coupon: string | null;
+    discount: number | null;
+    freight_type: string | null;
+    freight_amount: number | null;
     date_of_expiration: Date;
     date_created?: Date;
 }

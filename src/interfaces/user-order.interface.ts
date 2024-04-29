@@ -1,12 +1,14 @@
 import { Model } from "sequelize";
 
-export interface UserOrderI{
+export interface UserOrderI {
     order_id: number;
     user_id: number;
     payment_method: string;
     street: string;
     number: number;
     cep: string;
+    coupon?: string;
+    status: string;
     city: string;
     state: string;
     created_at: Date;
