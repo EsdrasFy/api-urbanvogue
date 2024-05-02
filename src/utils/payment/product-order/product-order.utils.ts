@@ -1,5 +1,5 @@
 import { ProductCartI } from "../../../interfaces/product-cart.interface";
-import { ProductOrderM } from "../../../models/payment/product-order/product-order.model";
+import { ProductOrderM } from "../../../database/models/payment/product-order/product-order.model";
 import { createProductOrderRes } from "./types";
 
 async function createProductOrder({

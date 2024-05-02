@@ -1,7 +1,7 @@
 import { CouponI } from "../../interfaces/coupon.interface";
 import { ProductI } from "../../interfaces/product.interface";
-import { CouponM } from "../../models/product/coupon/coupon.model";
-import ProductM from "../../models/product/product.model";
+import { ProductCouponM } from "../../database/models/product/product-coupon/coupon.model"
+import ProductM from "../../database/models/product/product.model";
 import { VerifyCouponProps, VerifyCouponRes } from "./types";
 
 async function VerifyCoupon({
@@ -47,7 +47,7 @@ async function VerifyCoupon({
     };
   }
 
-  const coupon: CouponI | null = (await CouponM.findOne({
+  const coupon: CouponI | null = (await ProductCouponM.findOne({
     where: { code },
   })) as CouponI | null;
 

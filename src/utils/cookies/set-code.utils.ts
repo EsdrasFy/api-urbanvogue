@@ -1,7 +1,6 @@
 import Cookies from "cookies";
 import { Request, Response } from "express";
 require("dotenv").config();
-import jwt from "jsonwebtoken";
 
 export async function SetCode({
   req,

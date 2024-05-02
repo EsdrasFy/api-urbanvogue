@@ -1,5 +1,5 @@
 import { CardI } from "../../interfaces/card.interface";
-import { CardM } from "../../models/user/card/card.model";
+import { CardM } from "../../database/models/user/user-card/user-card.model";
 import { VerifyCardResponse } from "./types";
 
 async function VerifyCard({

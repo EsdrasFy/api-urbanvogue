@@ -1,6 +1,6 @@
 import { AddressI } from "../../../interfaces/address.interface";
 import { UserOrderI } from "../../../interfaces/user-order.interface";
-import { PaymentM } from "../../../models/payment/payment.model";
+import { PaymentM } from "../../../database/models/payment/payment.model";
 import { getAddress } from "../../../service/user/user.service";
 import { createOrderProps, createOrderRes } from "./types";
 

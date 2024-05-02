@@ -3,13 +3,13 @@ import { Request, Response } from "express";
 const { Translate } = require("@google-cloud/translate").v2;
 import * as puppeteer from "puppeteer";
 import * as natural from "natural";
-import ProductM from "../../../models/product/product.model";
-import { ProductImageM } from "../../../models/product/product-image/product-image.model";
+import ProductM from "../../../database/models/product/product.model";
+import { ProductImageM } from "../../../database/models/product/product-image/product-image.model";
 import { ProductColorI, ProductDetailI, ProductFlagI, ProductI, ProductImageI, ProductSizeI } from "../../../interfaces/product.interface";
-import { ProductFlagM } from "../../../models/product/product-flags/product-flags.model";
-import { ProductColorM } from "../../../models/product/product-color/product-color.model";
-import { ProductSizeM } from "../../../models/product/product-size/product-size.model";
-import { ProductDetailM } from "../../../models/product/product-detail/product-detail.model";
+import { ProductFlagM } from "../../../database/models/product/product-flag/product-flag.model";
+import { ProductColorM } from "../../../database/models/product/product-color/product-color.model";
+import { ProductSizeM } from "../../../database/models/product/product-size/product-size.model";
+import { ProductDetailM } from "../../../database/models/product/product-detail/product-detail.model";
 import CREDENTIALS from "../../../../urban-vogue-410216-e4add7f801f7.json"
 
 // Configuration for the client
@@ -225,7 +225,6 @@ function extrairPalavrasChave(descricao: string): string[] {
     const urlClone = "https://www.posthaus.com.br/";
   
     const searchFor = req.params.content;
-    console.log(searchFor);
   
     try {
       const browser = await puppeteer.launch({ headless: false });
@@ -282,8 +281,6 @@ function extrairPalavrasChave(descricao: string): string[] {
   
     const category = OldCategory2.toLowerCase().replace(/\s+/g, "-");
   
-    console.log(price);
-  
     // marca
     const brand = link.split("/")[3];
     // tamanhos
@@ -310,9 +307,7 @@ function extrairPalavrasChave(descricao: string): string[] {
     const detailsPT = await page.$$eval(".sc-kgoBCf.jeIRcN", (el) =>
       el.map((p) => p.innerHTML)
     );
-    console.log(detailsPT);
-    
-  
+
     let details: string[] = [];
   
     for (const detail of detailsPT) {
@@ -388,12 +383,10 @@ function extrairPalavrasChave(descricao: string): string[] {
       brand,
       category,
     } = productInfo;
-    console.log(details);
   
     try {
       const quantity = Math.floor(Math.random() * 100) + 1;
       const sold = Math.floor(Math.random() * 200);
-      console.log(sold, quantity);
   
       const assessment = Math.floor(Math.random() * 5) + 1;
   
@@ -424,7 +417,7 @@ function extrairPalavrasChave(descricao: string): string[] {
         if (!imageCreate) {
           throw new Error("Erro na criação da imagem");
         }
-        console.log("imagem criada");
+
       }
       for (const flag of flags) {
         const flagCreate = (await ProductFlagM.create({
@@ -435,7 +428,7 @@ function extrairPalavrasChave(descricao: string): string[] {
         if (!flagCreate) {
           throw new Error("Erro na criação da flag");
         }
-        console.log("flag criada");
+        
       }
       for (const color of colors) {
         const colorCreate = (await ProductColorM.create({
@@ -446,7 +439,7 @@ function extrairPalavrasChave(descricao: string): string[] {
         if (!colorCreate) {
           throw new Error("Erro na criação da imagem");
         }
-        console.log("cor criada");
+     
       }
       for (const size of sizes) {
         const sizeCreate = (await ProductSizeM.create({
@@ -457,7 +450,7 @@ function extrairPalavrasChave(descricao: string): string[] {
         if (!sizeCreate) {
           throw new Error("Erro na criação da imagem");
         }
-        console.log("size criada");
+       
       }
       for (const detail of details) {
         const detailCreate = (await ProductDetailM.create({
@@ -468,9 +461,8 @@ function extrairPalavrasChave(descricao: string): string[] {
         if (!detailCreate) {
           throw new Error("Erro na criação da imagem");
         }
-        console.log("detail criada");
+       
       }
-      /*rever videos sobre relação de tabela e mudar o schema talvez*/
       console.log("produto adicionado");
     } catch (error) {
       console.error(error);

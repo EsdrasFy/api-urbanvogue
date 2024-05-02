@@ -1,6 +1,6 @@
 require("dotenv").config();
 import { Request, Response } from "express";
-import { UserM } from "../../../models/user/user.model";
+import { UserM } from "../../../database/models/user/user.model";
 import { VerifyCoupon } from "../../../utils/verify-coupon";
 import { createOrder } from "../../../utils/payment/create-order/create-order.util";
 import { createProductOrder } from "../../../utils/payment/product-order/product-order.utils";

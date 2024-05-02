@@ -10,4 +10,5 @@ export interface AddressI extends Model<any, any>{
     state: string;
     type_address: string;
     reference?: string;
+    createdAt: Date;
 }

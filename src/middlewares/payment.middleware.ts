@@ -1,7 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import Cookies from "cookies";
-import { GoogleOAuth } from "../utils/oauth/google/google.utils";
-import { GithubOAuth } from "../utils/oauth/github/github.utils";
 import {
   ControllerCard,
   ControllerPix,

@@ -11,4 +11,5 @@ export interface CardI extends Model<any, any> {
     card_network: string;
     expiration_date: string;
     cvv: string;
+    createdAt: Date;
 }

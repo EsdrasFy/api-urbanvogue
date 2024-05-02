@@ -1,4 +1,4 @@
-import { PaymentCardM } from "../../../models/payment/payment-card/payment-card.model";
+import { PaymentCardM } from "../../../database/models/payment/payment-card/payment-card.model";
 import {
   createPaymentCardOrderProps,
   createPaymentCardOrderRes,

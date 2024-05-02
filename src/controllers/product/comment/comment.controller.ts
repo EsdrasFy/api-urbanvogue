@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import ProductM from "../../../models/product/product.model";
-import { UserM } from "../../../models/user/user.model";
-import { CommentM } from "../../../models/product/comment/comment.model";
+import ProductM from "../../../database/models/product/product.model";
+import { UserM } from "../../../database/models/user/user.model";
+import { CommentM } from "../../../database/models/product/product-comment/comment.model";
 import { CommentI } from "../../../interfaces/comment.interface";
-import { CommentsUrlM } from "../../../models/product/comment/comment-url.model";
+import { CommentsUrlM } from "../../../database/models/product/product-comment/comment-url.model";
 
 interface RequiredFields {
   [key: string]: { null: string; type: string };

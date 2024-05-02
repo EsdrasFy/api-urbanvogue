@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { CardM } from "../../../models/user/card/card.model";
-import { UserM } from "../../../models/user/user.model";
+import { CardM } from "../../../database/models/user/user-card/user-card.model";
+import { UserM } from "../../../database/models/user/user.model";
 import { CardI } from "../../../interfaces/card.interface";
 
 interface RequiredFields {

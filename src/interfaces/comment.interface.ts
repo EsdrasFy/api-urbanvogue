@@ -1,8 +1,11 @@
 export interface CommentI {
     comment_id: number;
-    comment_text: string;
+    text_comment: string;
     user_id: number;
+    user_img: string;
     product_id: number;
     rating: number;
-    timespost: string; 
-}
+    username: string;
+    recommend: boolean;
+    createdAt: Date; 
+  }

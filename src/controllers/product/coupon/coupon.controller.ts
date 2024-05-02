@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { CouponM } from "../../../models/product/coupon/coupon.model";
+import { ProductCouponM } from "../../../database/models/product/product-coupon/coupon.model";
 import { CouponI } from "../../../interfaces/coupon.interface";
 import { ProductI } from "../../../interfaces/product.interface";
-import ProductM from "../../../models/product/product.model";
+import ProductM from "../../../database/models/product/product.model";
 
 async function createCoupons(req: Request, res: Response) {
   const {
@@ -28,7 +28,7 @@ async function createCoupons(req: Request, res: Response) {
   }
 
   try {
-    const createdCoupon = await CouponM.create({
+    const createdCoupon = await ProductCouponM.create({
       code,
       description,
       valid_category,
@@ -51,7 +51,7 @@ async function validateCoupon(req: Request, res: Response) {
 
   try {
     // Busca o cupom pelo código
-    const coupon: CouponI | null = (await CouponM.findOne({
+    const coupon: CouponI | null = (await ProductCouponM.findOne({
       where: { code },
     })) as CouponI | null;
 

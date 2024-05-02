@@ -1,4 +1,4 @@
-import { PaymentPixM } from "../../../models/payment/payment-pix/payment-pix.model";
+import { PaymentPixM } from "../../../database/models/payment/payment-pix/payment-pix.model";
 import { createPaymentPixOrderProps, createPaymentPixOrderRes } from "./types";
 
 async function createPaymentPixOrder({

@@ -1,5 +1,5 @@
 require("dotenv").config();
-import { UserM } from "../../../models/user/user.model";
+import { UserM } from "../../../database/models/user/user.model";
 import { Request, Response } from "express";
 import { UserI } from "../../../interfaces/user.interface";
 

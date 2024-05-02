@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { Op, WhereOptions } from "sequelize";
-import ProductM from "../../../models/product/product.model";
-import { ProductImageM } from "../../../models/product/product-image/product-image.model";
-import { ProductColorM } from "../../../models/product/product-color/product-color.model";
-import { ProductDetailM } from "../../../models/product/product-detail/product-detail.model";
-import { ProductSizeM } from "../../../models/product/product-size/product-size.model";
-import { ProductFlagM } from "../../../models/product/product-flags/product-flags.model";
+import ProductM from "../../../database/models/product/product.model";
+import { ProductImageM } from "../../../database/models/product/product-image/product-image.model";
+import { ProductColorM } from "../../../database/models/product/product-color/product-color.model";
+import { ProductDetailM } from "../../../database/models/product/product-detail/product-detail.model";
+import { ProductSizeM } from "../../../database/models/product/product-size/product-size.model";
+import { ProductFlagM } from "../../../database/models/product/product-flag/product-flag.model";
 import { ProductI } from "../../../interfaces/product.interface";
 
 async function filterProducts(req: Request, res: Response) {

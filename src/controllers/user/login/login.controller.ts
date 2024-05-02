@@ -2,7 +2,7 @@ require("dotenv").config();
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import Cookies from "cookies";
-import { UserM } from "../../../models/user/user.model";
+import { UserM } from "../../../database/models/user/user.model";
 
 async function login(req: Request, res: Response) {
   const cookies = new Cookies(req, res);

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import ProductM from "../../../models/product/product.model";
+import ProductM from "../../../database/models/product/product.model";
 
 interface RequiredFields {
     [key: string]: { null: string; type: string };

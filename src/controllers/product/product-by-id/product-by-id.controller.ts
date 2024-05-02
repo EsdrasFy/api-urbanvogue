@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { CommentM } from "../../../models/product/comment/comment.model";
+import { CommentM } from "../../../database/models/product/product-comment/comment.model";
 import { ProductI } from "../../../interfaces/product.interface";
-import ProductM from "../../../models/product/product.model";
-import { ProductImageM } from "../../../models/product/product-image/product-image.model";
-import { ProductColorM } from "../../../models/product/product-color/product-color.model";
-import { ProductDetailM } from "../../../models/product/product-detail/product-detail.model";
-import { ProductSizeM } from "../../../models/product/product-size/product-size.model";
+import ProductM from "../../../database/models/product/product.model";
+import { ProductImageM } from "../../../database/models/product/product-image/product-image.model";
+import { ProductColorM } from "../../../database/models/product/product-color/product-color.model";
+import { ProductDetailM } from "../../../database/models/product/product-detail/product-detail.model";
+import { ProductSizeM } from "../../../database/models/product/product-size/product-size.model";
 
 async function productById(req: Request, res: Response) {
   const { id } = req.params;

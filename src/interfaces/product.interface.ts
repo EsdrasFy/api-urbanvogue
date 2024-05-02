@@ -16,8 +16,8 @@ export interface ProductI extends Model<any, any> {
   parcelable: boolean;
   max_installments?: number;
   interest_rate?: number;
-  updated_at: Date;
-  created_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
   images: ProductImageI[];
   flags: ProductFlagI[];
   sizes: ProductSizeI[];

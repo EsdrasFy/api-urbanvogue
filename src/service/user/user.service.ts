@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Request, Response } from "express";
-import { UserM } from "../../models/user/user.model";
+import { UserM } from "../../database/models/user/user.model";
 import { UserI } from "../../interfaces/user.interface";
 import bcrypt from "bcrypt";
 require("dotenv").config();
@@ -11,7 +11,7 @@ import {
   GoogleTokensResult,
   GoogleUserResult,
 } from "./types";
-import { AddressM } from "../../models/user/address/adress.model";
+import { AddressM } from "../../database/models/user/user-address/user-adress.model";
 import { AddressI } from "../../interfaces/address.interface";
 
 export async function CreateUser({

@@ -1,8 +1,7 @@
-import { UserM } from "../../../models/user/user.model";
+import { UserM } from "../../../database/models/user/user.model";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 require("dotenv").config();
-import { UserI } from "../../../interfaces/user.interface";
 import { isValidEmail } from "../../../service/user/user.service";
 import { SetCode } from "../../../utils/cookies/set-code.utils";
 import { HtmlRecoveryPassword } from "../../../constants/html";

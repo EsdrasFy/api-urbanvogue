@@ -1,5 +1,5 @@
-import { UserM } from "../../../models/user/user.model";
-import { AddressM } from "../../../models/user/address/adress.model";
+import { UserM } from "../../../database/models/user/user.model";
+import { AddressM } from "../../../database/models/user/user-address/user-adress.model";
 import { AddressI } from "../../../interfaces/address.interface";
 import { Request, Response } from "express";
 require("dotenv").config();

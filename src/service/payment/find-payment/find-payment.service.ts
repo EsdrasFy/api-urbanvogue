@@ -1,6 +1,6 @@
-import { PaymentCardM } from "../../../models/payment/payment-card/payment-card.model";
-import { PaymentPixM } from "../../../models/payment/payment-pix/payment-pix.model";
-import { PaymentM } from "../../../models/payment/payment.model";
+import { PaymentCardM } from "../../../database/models/payment/payment-card/payment-card.model";
+import { PaymentPixM } from "../../../database/models/payment/payment-pix/payment-pix.model";
+import { PaymentM } from "../../../database/models/payment/payment.model";
 import { PaymentFindI } from "./types";
 
 async function findPaymentPix({

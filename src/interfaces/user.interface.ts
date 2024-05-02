@@ -15,5 +15,6 @@ export interface UserI extends Model<any, any> {
   verify_phone: boolean;
   gender: string;
   cpf: string;
-  created_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }

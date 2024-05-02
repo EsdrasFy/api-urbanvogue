@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { PaymentM } from "../../../models/payment/payment.model";
+import { PaymentM } from "../../../database/models/payment/payment.model"
 import { isValidUserId } from "../../../service/user/user.service";
-import { ProductOrderM } from "../../../models/payment/product-order/product-order.model";
-import { PaymentPixM } from "../../../models/payment/payment-pix/payment-pix.model";
-import { PaymentCardM } from "../../../models/payment/payment-card/payment-card.model";
+import { ProductOrderM } from "../../../database/models/payment/product-order/product-order.model"
+import { PaymentPixM } from "../../../database/models/payment/payment-pix/payment-pix.model"
+import { PaymentCardM } from "../../../database/models/payment/payment-card/payment-card.model"
 
 async function getOrders(req: Request, res: Response) {
   const { id } = req.params;

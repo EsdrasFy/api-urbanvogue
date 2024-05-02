@@ -37,7 +37,8 @@ interface UserOrderI {
     cep: string;
     city: string;
     state: string;
-    created_at: string;
+    createdAt: Date;
+    updatedAt: Date;
     payment_pix: PaymentPixI[];
     product_orders: ProductOrderI[];
 }
