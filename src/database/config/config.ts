@@ -1,6 +1,5 @@
 import "dotenv/config";
-import { Dialect, Options } from "sequelize";
-const dialects: Dialect[] = ["mysql", "postgres", "sqlite", "mariadb", "mssql"];
+import { Options } from "sequelize";
 
 const config: Options = {
   username: process.env.DB_USER || undefined,
@@ -8,10 +7,8 @@ const config: Options = {
   database: process.env.DB_NAME || undefined,
   host: process.env.DB_HOST || undefined,
   port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : undefined,
-  dialect: dialects.includes(process.env.DIALECT as Dialect)
-    ? (process.env.DIALECT as Dialect)
-    : "mysql",
-  logging: process.env.LOGGING ? true : false,
+  dialect: "mysql",
+  logging:false,
 };
 
 export = config;
