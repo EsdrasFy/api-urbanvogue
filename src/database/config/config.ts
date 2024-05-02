@@ -8,6 +8,7 @@ const config: Options = {
   host: process.env.DB_HOST || undefined,
   port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : undefined,
   dialect: "mysql",
+  dialectModule: require("mysql2"),
   logging:false,
 };
 
