@@ -48,7 +48,6 @@ export async function CreateUser({
 
     return user;
   } catch (error: any) {
-    console.error(error, "An error occurred when creating the user");
     throw new Error(error.message);
   }
 }
@@ -70,7 +69,6 @@ export async function isValidEmail({
     }
     return null;
   } catch (error: any) {
-    console.log(error.message);
     return null;
   }
 }
@@ -92,7 +90,6 @@ export async function isValidUsername({
     }
     return null;
   } catch (error: any) {
-    console.error(error, "Error in verify username");
     throw new Error(error.message);
   }
 }
@@ -149,7 +146,6 @@ export async function compareCredential(
 
     return user.user_id;
   } catch (error: any) {
-    console.error(error, "Credentials incorrect");
     throw new Error(error.message);
   }
 }
@@ -182,8 +178,6 @@ export async function getGoogleOAuthTokens({
     });
     return res.data;
   } catch (error: any) {
-    console.log(error, "Failed to fetch Google OAuth Tokens");
-
     throw new Error(error.message);
   }
 }
@@ -206,7 +200,6 @@ export async function getGoogleUser({
     );
     return res.data;
   } catch (error: any) {
-    console.error(error, "Error fetching Google user");
     throw new Error(error.message);
   }
 }
@@ -233,7 +226,6 @@ export async function getGithubOAuthTokens({
 
     return res.data.access_token;
   } catch (error: any) {
-    console.error(error, "Failed to fetch Github OAuth Tokens");
     throw new Error(error.message);
   }
 }
@@ -254,8 +246,6 @@ export async function getGithubUser({
     });
     return res.data;
   } catch (error: any) {
-    console.log(error, "Failed to fetch Google OAuth Tokens");
-
     throw new Error(error.message);
   }
 }

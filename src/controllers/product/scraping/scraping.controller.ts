@@ -256,7 +256,7 @@ function extrairPalavrasChave(descricao: string): string[] {
     await page.waitForSelector(".sc-bvTASY div div img");
     await page.waitForSelector("h1");
     await page.waitForSelector(".bWeRxa");
-    await page.waitForSelector(".sc-jAaTju.cRBfqT");
+    await page.waitForSelector(".sc-jWBwVP.sc-cMljjf.sc-jAaTju");
     await page.waitForSelector(".sc-kgoBCf.jeIRcN");
     // titulo
     const OldTitle = await page.$eval(
@@ -265,7 +265,7 @@ function extrairPalavrasChave(descricao: string): string[] {
     );
     const title = await translateText(OldTitle, "en");
     // preço
-    const preco = await page.$eval(".sc-jAaTju.cRBfqT", (element) => element.innerHTML);
+    const preco = await page.$eval(".sc-jWBwVP.sc-cMljjf.sc-jAaTju", (element) => element.innerHTML);
     const formattedPrice = parseFloat(
       preco
         ?.replace(/&nbsp;|\s|[^\d,.]/g, "")
