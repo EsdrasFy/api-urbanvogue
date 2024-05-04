@@ -5,6 +5,7 @@ import { UserI } from "../../interfaces/user.interface";
 import bcrypt from "bcrypt";
 require("dotenv").config();
 import {
+  ChangeEmailPromise,
   CreateUserData,
   GithubTokensResult,
   GithubUserResult,
@@ -13,6 +14,7 @@ import {
 } from "./types";
 import { AddressM } from "../../database/models/user/user-address/user-adress.model";
 import { AddressI } from "../../interfaces/address.interface";
+import { where } from "sequelize";
 
 export async function CreateUser({
   fullname,
@@ -265,4 +267,38 @@ export async function getAddress({
   })) as AddressI | null;
 
   return address;
+}
+
+export async function changeEmail({
+  user_id,
+  email,
+}: {
+  user_id: number;
+  email: string;
+}): Promise<ChangeEmailPromise> {
+
+  const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  if (!regex.test(email)) {
+    return {
+      msg: "Format email invalid.",
+      status: 401,
+    };
+  }
+
+  const [affectedRowsCount] = await UserM.update(
+    { email: email },
+    { where: { user_id: user_id } }
+  );
+
+  if (affectedRowsCount > 0) {
+    return {
+      msg: "Email updated successfully",
+      status: 200,
+    };
+  } else {
+    return {
+      msg: "'User not found or email not updated'",
+      status: 404,
+    };
+  }
 }

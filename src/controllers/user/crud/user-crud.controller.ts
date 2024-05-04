@@ -28,10 +28,8 @@ async function updateUser(req: Request, res: Response) {
     user_id,
     fullname,
     username,
-    email,
     profile_img,
     birthdate,
-    phone,
     gender,
     cpf,
   } = req.body;
@@ -42,9 +40,6 @@ async function updateUser(req: Request, res: Response) {
   }
   if (!fullname || fullname.length < 8) {
     return res.status(401).json({ msg: "Full name required!" });
-  }
-  if (!email) {
-    return res.status(401).json({ msg: "Email required!" });
   }
   if (!user_id) {
     return res.status(401).json({ msg: "User ID required!" });
@@ -73,17 +68,6 @@ async function updateUser(req: Request, res: Response) {
       }
     }
 
-     // existing Email
-    const existingEmail = (await UserM.findOne({
-      where: {
-        email: email,
-      },
-    })) as UserI;
-
-    if (existingEmail && existingEmail.user_id !== user.user_id) {
-      return res.status(400).json({ msg: "Email is already in use." });
-    }
-
     // existing Username
     const existingUsername = (await UserM.findOne({
       where: {
@@ -100,11 +84,9 @@ async function updateUser(req: Request, res: Response) {
       {
         username: username,
         fullname: fullname,
-        email: email,
         profile_img: profile_img || user.profile_img,
         password_hash: user.password_hash,
         date_of_birth: birthdate,
-        phone: phone,
         gender: gender,
         cpf: cpf,
       },
@@ -118,8 +100,6 @@ async function updateUser(req: Request, res: Response) {
     return res.status(200).json({ msg: "Successfull update!", user: updatedUser });
 
   } catch (error: any) {
-    console.log(error);
-    
     return res.status(500).json({ msg: error.message ||  "Error updating user!", user: null });
   }
 }

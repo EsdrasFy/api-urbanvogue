@@ -18,6 +18,7 @@ async function credentialMiddle(
     const id = await compareCredential(req, res);
     await SetJwt({ id, req, res });
     next();
+    
   } catch (error: any) {
     return res
       .status(401)

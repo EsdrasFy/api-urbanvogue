@@ -17,15 +17,14 @@ export interface GoogleUserResult {
   locale: string;
 }
 
-
 export interface GithubTokensResult {
-    data:{
-      access_token: string;
-      token_type: string;
-      scope: string;
-    }
-  }
-  
+  data: {
+    access_token: string;
+    token_type: string;
+    scope: string;
+  };
+}
+
 export interface GithubUserResult {
   login: string;
   id: number;
@@ -76,4 +75,9 @@ export interface CreateUserData {
   verify_phone?: boolean;
   gender?: string;
   cpf?: string;
+}
+
+export interface ChangeEmailPromise {
+  status: number;
+  msg: string;
 }

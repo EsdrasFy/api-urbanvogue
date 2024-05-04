@@ -2,44 +2,17 @@ import { UserM } from "../../../database/models/user/user.model";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 require("dotenv").config();
-import { isValidEmail } from "../../../service/user/user.service";
-import { SetCode } from "../../../utils/cookies/set-code.utils";
-import { HtmlRecoveryPassword } from "../../../constants/html";
-import { SendEmailHTML } from "../../../utils/email/email.utils";
 import Cookies from "cookies";
 import jwt from "jsonwebtoken";
 
 const secret = process.env.SECRET as string;
 
-async function sendEmail(req: Request, res: Response) {
-  const { email } = req.params;
 
-  const existingUser = await isValidEmail({ email });
 
-  if (!existingUser) {
-    return res
-      .status(404)
-      .json({ msg: "User with this email does not exist." });
-  }
-
-  const code = await SetCode({ req, res });
-
-  const html = HtmlRecoveryPassword(code);
-  const success = await SendEmailHTML({ email, html });
-
-  if (!success) {
-    return res
-      .status(500)
-      .json({ msg: "Error sending the code to your email." });
-  }
-
-  return res.status(201).json({ msg: "A code has been sent to your email." });
-}
-
-async function sendCode(req: Request, res: Response) {
-  const { code, email } = req.params;
+async function receiveEmail(req: Request, res: Response) {
+  const { code, email } = req.body;
   const cookies = new Cookies(req, res);
-  const realCode = cookies.get("code");
+  const realCode = cookies.get("forgot_password");
   if (!realCode) {
     return res.status(401).json({ msg: "Expired code!" });
   }
@@ -47,17 +20,17 @@ async function sendCode(req: Request, res: Response) {
     return res.status(401).json({ msg: "Incorrect code!" });
   }
 
-  const tokenRecovery = jwt.sign({ email }, secret, {
+  const passwordRecoveryCode = jwt.sign({ email }, secret, {
     expiresIn: "5m",
   });
 
-  cookies.set("tokenRecovery", tokenRecovery, {
+  cookies.set("passwordRecoveryCode", passwordRecoveryCode, {
     httpOnly: true,
     maxAge: 5 * 60 * 1000,
     path: "/",
   });
 
-  cookies.set("code", code, {
+  cookies.set("forgot_password", code, {
     httpOnly: true,
     maxAge: 1,
     path: "/",
@@ -70,10 +43,10 @@ async function sendCode(req: Request, res: Response) {
 
 async function resetPassword(req: Request, res: Response) {
   const cookies = new Cookies(req, res);
-  const tokenRecovery = cookies.get("tokenRecovery");
+  const passwordRecoveryCode = cookies.get("passwordRecoveryCode");
   const { password } = req.body;
 
-  if (!tokenRecovery) {
+  if (!passwordRecoveryCode) {
     return res.status(401).json({ msg: "Expired code!" });
   }
 
@@ -82,7 +55,7 @@ async function resetPassword(req: Request, res: Response) {
   }
 
   jwt.verify(
-    tokenRecovery,
+    passwordRecoveryCode,
     secret,
     async (err: jwt.VerifyErrors | null, decodedToken: any) => {
       if (err) {
@@ -98,7 +71,7 @@ async function resetPassword(req: Request, res: Response) {
 
         { where: { email: email } }
       );
-      cookies.set("tokenRecovery", "a", {
+      cookies.set("passwordRecoveryCode", "a", {
         httpOnly: true,
         maxAge: 1,
         path: "/",
@@ -110,4 +83,4 @@ async function resetPassword(req: Request, res: Response) {
   );
 }
 
-export { resetPassword, sendEmail, sendCode };
+export { resetPassword, receiveEmail };
