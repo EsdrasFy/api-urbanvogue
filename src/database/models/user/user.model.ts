@@ -79,7 +79,7 @@ const UserM = db.define(
   {
     timestamps: false,
     freezeTableName: true,
-    tableName: "users",
+    tableName: "user",
   }
 );
 

@@ -131,7 +131,7 @@ async function comments(req: Request, res: Response) {
       where: {
         product_id: id,
       },
-      order: [["timespost", "DESC"]],
+      order: [["createdAt", "DESC"]],
       include: [
         {
           model: CommentsUrlM,
@@ -148,7 +148,7 @@ async function comments(req: Request, res: Response) {
         "username",
         "rating",
         "recommend",
-        "timespost",
+        "createdAt",
       ],
     });
     res.status(200).json({ comments, status: 200 });

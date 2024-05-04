@@ -84,7 +84,7 @@ export class SearchProducts {
       const offsetValue =
         typeof data.offset === "string" ? parseInt(data.offset, 10) : 0;
       const limitValue =
-        typeof data.limit === "string" ? parseInt(data.limit, 10) : 23;
+        typeof data.limit === "string" ? parseInt(data.limit, 10) : 100;
 
       return { offsetValue, limitValue, where, order };
     } catch (error) {

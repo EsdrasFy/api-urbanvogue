@@ -133,6 +133,8 @@ async function productSearch(req: Request, res: Response) {
     offset,
     category,
     brand,
+    sizes,
+    colors,
     min,
     max,
   } = req.query;
@@ -169,7 +171,7 @@ async function productSearch(req: Request, res: Response) {
 
     const { limitValue, offsetValue, order, where } =
       (await search.makeParameters(data)) as MakeParametersPromise;
-      
+
     const products: ProductI[] = (await ProductM.findAll({
       where,
       offset: offsetValue,
