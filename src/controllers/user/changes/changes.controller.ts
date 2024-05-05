@@ -6,7 +6,7 @@ import { SetCode } from "../../../utils/cookies/set-code.utils";
 async function UserChanges(req: Request, res: Response) {
   const { change, email, user_id } = req.body;
   const types = ["email", "password", "phone"];
-  
+
   if (!change || !types.includes(change as string)) {
     return res
       .status(401)
@@ -25,7 +25,8 @@ async function UserChanges(req: Request, res: Response) {
     user_id: +user_id,
   });
 
-  
+  console.log(code);
+
   if (change === "email") {
     if (!email || typeof email !== "string") {
       return res.status(401).json({ msg: "Email is required." });
