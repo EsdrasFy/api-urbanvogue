@@ -9,7 +9,7 @@ const config: Options = {
   port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : undefined,
   dialect: "mysql",
   dialectModule: require("mysql2"),
-  logging:false,
+  logging: true,
 };
 
 export = config;

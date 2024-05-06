@@ -7,13 +7,13 @@ export async function SetCode({
   res,
   name,
   data,
-  user_id
+  user_id,
 }: {
   req: Request;
   res: Response;
   name: string;
   data: string;
-  user_id: number
+  user_id: number;
 }): Promise<string> {
   let number = Math.floor(Math.random() * 1000000);
   let code = number.toString().padStart(6, "0");
@@ -24,6 +24,7 @@ export async function SetCode({
     maxAge: 30 * 60 * 1000,
     path: "/",
   });
+  console.log({ name, data, user_id });
 
   return code;
 }

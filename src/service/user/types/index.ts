@@ -77,7 +77,7 @@ export interface CreateUserData {
   cpf?: string;
 }
 
-export interface ChangeEmailPromise {
+export interface ChangePromise {
   status: number;
   msg: string;
 }

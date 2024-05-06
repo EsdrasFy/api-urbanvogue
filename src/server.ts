@@ -1,10 +1,9 @@
 import dotenv from "dotenv";
-import app from "./app"
-
+import app from "./app";
+import "./service/whatsapp-web/whatsapp-web.service"
 dotenv.config();
 
 const PORT = process.env.PORT;
-
 
 try {
   app.listen(PORT, () => {

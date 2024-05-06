@@ -3,6 +3,7 @@ import { routes } from "./routes";
 import cors from "cors";
 const app: Application = express();
 
+
 app.use(
     cors({
       credentials: true,
@@ -14,9 +15,7 @@ app.use(
       ],
     })
   );
-  
   app.use(express.json());
   app.use(routes);
-
   
 export default app;

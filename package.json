@@ -24,6 +24,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/mercadopago": "^1.5.11",
     "@types/node": "^20.12.7",
+    "@types/qrcode-terminal": "^0.12.2",
     "@types/supertest": "^6.0.2",
     "@types/uuid": "^9.0.8",
     "jest": "^29.7.0",
@@ -48,9 +49,13 @@
     "natural": "^6.10.5",
     "nodemailer": "^6.9.13",
     "puppeteer": "^22.4.1",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.23.0",
     "sequelize": "^6.37.1",
+    "superagent": "^9.0.2",
     "supertest": "^6.3.4",
     "ts-node": "^10.9.2",
+    "twilio": "^5.0.4",
     "uui": "^1.0.7"
   }
 }

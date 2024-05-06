@@ -5,7 +5,7 @@ import { UserI } from "../../interfaces/user.interface";
 import bcrypt from "bcrypt";
 require("dotenv").config();
 import {
-  ChangeEmailPromise,
+  ChangePromise,
   CreateUserData,
   GithubTokensResult,
   GithubUserResult,
@@ -275,30 +275,127 @@ export async function changeEmail({
 }: {
   user_id: number;
   email: string;
-}): Promise<ChangeEmailPromise> {
-
+}): Promise<ChangePromise> {
   const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+
   if (!regex.test(email)) {
     return {
-      msg: "Format email invalid.",
+      msg: "Invalid email format.",
       status: 401,
     };
   }
 
-  const [affectedRowsCount] = await UserM.update(
-    { email: email },
-    { where: { user_id: user_id } }
-  );
-
-  if (affectedRowsCount > 0) {
+  try {
+    if (user_id) {
+      const [affectedRowsCount] = await UserM.update(
+        { email: email, verify_email: true },
+        { where: { user_id: user_id } }
+      );
+      if (affectedRowsCount > 0) {
+        return {
+          msg: "Email updated successfully",
+          status: 200,
+        };
+      } else {
+        return {
+          msg: "User not found or email not updated",
+          status: 404,
+        };
+      }
+    }
     return {
-      msg: "Email updated successfully",
-      status: 200,
+      msg: "THe field UserID is required!",
+      status: 401,
     };
-  } else {
+  } catch (error) {
     return {
-      msg: "'User not found or email not updated'",
-      status: 404,
+      msg: "Error updating email",
+      status: 500,
+    };
+  }
+}
+
+export async function changePhone({
+  user_id,
+  phone,
+}: {
+  user_id: number;
+  phone: string;
+}): Promise<ChangePromise> {
+  const regex = /^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/;
+
+  if (!regex.test(phone)) {
+    return {
+      msg: "Invalid phone format.",
+      status: 401,
+    };
+  }
+
+  try {
+    if (user_id) {
+      const [affectedRowsCount] = await UserM.update(
+        { phone: phone, verify_phone: true },
+        { where: { user_id: user_id } }
+      );
+      if (affectedRowsCount > 0) {
+        return {
+          msg: "Phone updated successfully",
+          status: 200,
+        };
+      } else {
+        return {
+          msg: "User not found or phone not updated",
+          status: 404,
+        };
+      }
+    }
+    return {
+      msg: "The field UserID is required!",
+      status: 401,
+    };
+  } catch (error) {
+    return {
+      msg: "Error updating phone",
+      status: 500,
+    };
+  }
+}
+
+export async function changePassword({
+  user_id,
+  password,
+}: {
+  user_id: number;
+  password: string;
+}): Promise<ChangePromise> {
+  try {
+    if (user_id) {
+      console.log(user_id);
+      
+      const [affectedRowsCount] = await UserM.update(
+        { password_hash: password },
+        { where: { user_id: user_id } }
+      );
+      if (affectedRowsCount > 0) {
+        return {
+          msg: "Password updated successfully",
+          status: 200,
+        };
+      } else {
+        return {
+          msg: "User not found or password not updated",
+          status: 404,
+        };
+      }
+    }
+    return {
+      msg: "THe field UserID is required!",
+      status: 401,
+    };
+  } catch (error) {
+    return {
+      msg: "Error updating password",
+      status: 500,
     };
   }
 }

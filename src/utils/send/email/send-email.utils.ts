@@ -3,7 +3,7 @@ import {
   isValidUserId,
 } from "../../../service/user/user.service";
 import { HtmlRecoveryPassword } from "../../../constants/html";
-import { SendEmailHTML } from "../../email/email.utils";
+import { MailerHTML } from "../../mailer/email.utils";
 
 interface SendEmailWithCodePromise {
   status: number;
@@ -14,6 +14,7 @@ async function SendEmailWithCode(
   email: string,
   change: string,
   code: string,
+  id_existing:number,
   user_id: number
 ): Promise<SendEmailWithCodePromise> {
   try {
@@ -24,18 +25,10 @@ async function SendEmailWithCode(
         status: 401,
       };
     }
-    const existingUser = await isValidUserId({ user_id });
-
-    if (!existingUser) {
-      return {
-        msg: "User not found.",
-        status: 404,
-      };
-    }
 
     const existingEmail = await isValidEmail({ email });
 
-    if (existingEmail && existingUser.user_id !== existingEmail.user_id) {
+    if (existingEmail && id_existing !== existingEmail.user_id) {
       return {
         msg: "Email is already in use.",
         status: 401,
@@ -52,7 +45,7 @@ async function SendEmailWithCode(
       html = `<div>Code is: ${code}</div>`
     }
 
-    const success = await SendEmailHTML({ email, html });
+    const success = await MailerHTML({ email, html });
 
     if (!success) {
       return {

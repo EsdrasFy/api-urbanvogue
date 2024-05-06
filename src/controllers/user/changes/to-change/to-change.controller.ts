@@ -1,6 +1,11 @@
 import Cookies from "cookies";
 import { Request, Response } from "express";
-import { changeEmail } from "../../../../service/user/user.service";
+import {
+  changeEmail,
+  changePassword,
+  changePhone,
+} from "../../../../service/user/user.service";
+import bcrypt from "bcrypt";
 
 async function toChange(req: Request, res: Response) {
   const { change } = req.query;
@@ -19,10 +24,46 @@ async function toChange(req: Request, res: Response) {
       email: cookieData.data,
       user_id: +cookieData.user_id!,
     });
-   return res.status(changed.status).json({ msg: changed.msg });
+
+    if (changed.status === 200) {
+      cookies.set(change, "", { expires: new Date(0), path: "/" });
+    }
+    return res
+      .status(changed.status)
+      .json({ msg: changed.msg, email: cookieData.data });
   }
 
-  return res.status(200).json({ msg: "to-change", cookieData });
+  if (change === "phone") {
+    const changed = await changePhone({
+      phone: cookieData.data,
+      user_id: +cookieData.user_id!,
+    });
+
+    if (changed.status === 200) {
+      cookies.set(change, "", { expires: new Date(0), path: "/" });
+    }
+    return res
+      .status(changed.status)
+      .json({ msg: changed.msg, phone: cookieData.data });
+  }
+
+  if (change === "password") {
+    const salt = await bcrypt.genSalt(12);
+    const passwordHash = await bcrypt.hash(cookieData.data, salt);
+
+    const changed = await changePassword({
+      password: passwordHash,
+      user_id: +cookieData.user_id!,
+    });
+
+    if (changed.status === 200) {
+      cookies.set(change, "", { expires: new Date(0), path: "/" });
+    }
+
+    return res
+      .status(changed.status)
+      .json({ msg: changed.msg });
+  }
 }
 
 export { toChange };
