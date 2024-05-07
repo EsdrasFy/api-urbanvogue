@@ -55,7 +55,7 @@ async function SendEmailWithCode(
     }
     return {
       msg: "A code has been sent to your email.",
-      status: 201,
+      status: 200,
     };
   } catch (error: any) {
     return {

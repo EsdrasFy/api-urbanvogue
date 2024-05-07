@@ -1,3 +1,6 @@
-2024/05/06-13:08:48.122 1c26f Reusing MANIFEST /home/esdras/Documentos/GitHub/api-urbanvogue/.wwebjs_auth/session-wpp-web/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/05/06-13:08:48.122 1c26f Recovering log #112
-2024/05/06-13:08:48.145 1c26f Reusing old log /home/esdras/Documentos/GitHub/api-urbanvogue/.wwebjs_auth/session-wpp-web/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000112.log 
+2024/05/06-22:26:01.095 5a21 Reusing MANIFEST /home/esdras/Documentos/GitHub/api-urbanvogue/.wwebjs_auth/session-wpp-web/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/05/06-22:26:01.095 5a21 Recovering log #122
+2024/05/06-22:26:01.111 5a21 Reusing old log /home/esdras/Documentos/GitHub/api-urbanvogue/.wwebjs_auth/session-wpp-web/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000122.log 
+2024/05/06-22:26:01.111 5a21 Delete type=2 #119
+2024/05/06-22:26:01.111 5a21 Delete type=2 #120
+2024/05/06-22:26:01.111 5a21 Delete type=2 #123

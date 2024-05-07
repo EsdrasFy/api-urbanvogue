@@ -322,7 +322,7 @@ export async function changePhone({
   user_id: number;
   phone: string;
 }): Promise<ChangePromise> {
-  const regex = /^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/;
+  const regex = /^\d{1,3}\(?\d{3}\)?\d{3}\d{4}$/;
 
   if (!regex.test(phone)) {
     return {
@@ -330,6 +330,7 @@ export async function changePhone({
       status: 401,
     };
   }
+  
 
   try {
     if (user_id) {
