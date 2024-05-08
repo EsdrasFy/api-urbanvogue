@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 require("dotenv").config();
 import {
   ChangePromise,
+  CreateNotificationPromise,
   CreateUserData,
   GithubTokensResult,
   GithubUserResult,
@@ -14,7 +15,7 @@ import {
 } from "./types";
 import { AddressM } from "../../database/models/user/user-address/user-adress.model";
 import { AddressI } from "../../interfaces/address.interface";
-import { where } from "sequelize";
+import { UserNotifyM } from "../../database/models/user/user-notify/user-notify.model";
 
 export async function CreateUser({
   fullname,
@@ -330,7 +331,6 @@ export async function changePhone({
       status: 401,
     };
   }
-  
 
   try {
     if (user_id) {
@@ -372,7 +372,7 @@ export async function changePassword({
   try {
     if (user_id) {
       console.log(user_id);
-      
+
       const [affectedRowsCount] = await UserM.update(
         { password_hash: password },
         { where: { user_id: user_id } }
@@ -396,6 +396,55 @@ export async function changePassword({
   } catch (error) {
     return {
       msg: "Error updating password",
+      status: 500,
+    };
+  }
+}
+
+export async function getUserIdForRole({
+  roles,
+}: {
+  roles: string[];
+}): Promise<number[] | null> {
+  const users: UserI[] | null = (await UserM.findAll({
+    where: { role: roles },
+    attributes: ["user_id"],
+  })) as UserI[] | null;
+
+  if (!users) {
+    return null;
+  }
+
+  const userIds = users.map((user) => user.user_id);
+
+  return userIds;
+}
+export async function createNotification({
+  message,
+  redirect,
+  title,
+  user_id,
+}: {
+  user_id: number;
+  title: string;
+  message: string;
+  redirect: string;
+}): Promise<CreateNotificationPromise> {
+  try {
+    await UserNotifyM.create({
+      user_id: user_id,
+      title: title,
+      message: message,
+      redirect: redirect,
+      createdAt: new Date()
+    });
+    return {
+      msg: "Notification created successfully",
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      msg: "Error creating notification",
       status: 500,
     };
   }

@@ -39,7 +39,10 @@ select * from users;
 CREATE TABLE notify_messages (
     notify_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
+    title
     message VARCHAR(255),
+    read boolean
+    redirect
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 

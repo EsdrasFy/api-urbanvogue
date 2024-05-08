@@ -57,6 +57,10 @@ module.exports = {
       gender: {
         type: Sequelize.STRING,
       },
+      role: {
+        type: Sequelize.STRING,
+        defaultValue: "Client",
+      },
       cpf: {
         type: Sequelize.STRING,
         unique: true,

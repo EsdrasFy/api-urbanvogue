@@ -81,3 +81,8 @@ export interface ChangePromise {
   status: number;
   msg: string;
 }
+
+export interface CreateNotificationPromise {
+  status: number;
+  msg: string;
+}

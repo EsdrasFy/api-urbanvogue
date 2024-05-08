@@ -2,7 +2,6 @@ import db from "../index";
 import { DataTypes } from "sequelize";
 import { AddressM } from "./user-address/user-adress.model";
 import { CardM } from "./user-card/user-card.model";
-import { UserRoleM } from "./user-role/user-role.model";
 import { CommentM } from "../product/product-comment/comment.model";
 const UserM = db.define(
   "User",
@@ -60,6 +59,10 @@ const UserM = db.define(
     gender: {
       type: DataTypes.STRING,
     },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: "Client",
+    },
     cpf: {
       type: DataTypes.STRING,
       unique: true,
@@ -97,14 +100,6 @@ UserM.hasMany(CardM, {
   onUpdate: "CASCADE",
 });
 CardM.belongsTo(UserM, {
-  foreignKey: "user_id",
-});
-UserM.hasOne(UserRoleM, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE",
-});
-UserRoleM.belongsTo(UserM, {
   foreignKey: "user_id",
 });
 

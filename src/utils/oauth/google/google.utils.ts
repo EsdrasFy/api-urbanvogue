@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   CreateUser,
+  createNotification,
   getGoogleOAuthTokens,
   getGoogleUser,
   isValidEmail,
@@ -48,7 +49,8 @@ async function GoogleOAuth(req: Request, res: Response): Promise<any> {
     verify_email: true,
   });
 
-  
+  await createNotification({ user_id: user.user_id, message: "Your data is out of date, please click here or go to your profile and complete the registration.", redirect:"/account/edit", title:"Incomplete user information!" });
+  await createNotification({ user_id: user.user_id, message: "It's a pleasure to have you with us! Enjoy our varieties and always live in urban style.", redirect:"", title:"Welcome to urban vogue!" });
   res.redirect(successOAuth);
   
   await SetJwt({ id: user.user_id, req, res });

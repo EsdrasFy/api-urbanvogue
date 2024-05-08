@@ -56,6 +56,7 @@ import { forgotPasswordMiddle } from "./middlewares/forgot-password.middleware";
 import { UserChanges } from "./controllers/user/changes/changes.controller";
 import { toChange } from "./controllers/user/changes/to-change/to-change.controller";
 import { codeReceived } from "./middlewares/code-received.middeware";
+import { createNotifications, getNotifications, updateNotifications } from "./controllers/user/notify/notify-controller";
 
 // Rotas para o usuário
 routes.put("/user/update", updateUser);
@@ -77,6 +78,10 @@ routes.get("/address/:id", readAddress);
 
 routes.get("/orders/:id", getOrders);
 routes.get("/order/:user_id/:order_id", getOrderDetails);
+
+routes.post("/user/notification/create", createNotifications )
+routes.get("/user/notifications", getNotifications )
+routes.post("/user/notifications/update", updateNotifications)
 
 // cupons
 routes.post("/coupon/create", createCoupons);

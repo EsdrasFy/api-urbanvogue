@@ -14,6 +14,15 @@ export interface UserI extends Model<any, any> {
   phone: string;
   verify_phone: boolean;
   gender: string;
+  role:
+    | "Client"
+    | "Client Vip"
+    | "Product Manager"
+    | "Order Manager"
+    | "Customer Service"
+    | "Accounting and Finance"
+    | "Admin"
+    | "Owner";
   cpf: string;
   createdAt: Date;
   updatedAt: Date;
