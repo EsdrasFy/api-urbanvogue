@@ -11,12 +11,9 @@ import { GithubUserResult } from "../../../service/user/types";
 import { UserI } from "../../../interfaces/user.interface";
 import { SetJwt } from "../../cookies/set-jwt.utils";
 import dotenv from "dotenv";
-dotenv.config()
+dotenv.config();
 
-async function GithubOAuth(
-  req: Request,
-  res: Response,
-): Promise<any> {
+async function GithubOAuth(req: Request, res: Response): Promise<any> {
   const code: string = req.query.code as string;
   const successOAuth = process.env.OAUTH_SUCCESS_URL as string;
   if (!code) {
@@ -45,8 +42,20 @@ async function GithubOAuth(
       github_id: String(user.id),
       verify_email: true,
     });
-    await createNotification({ user_id: userNew.user_id, message: "Your data is out of date, please click here or go to your profile and complete the registration.", redirect:"/account/edit", title:"Incomplete user information!" });
-    await createNotification({ user_id: userNew.user_id, message: "It's a pleasure to have you with us! Enjoy our varieties and always live in urban style.", redirect:"", title:"Welcome to urban vogue!" });
+    await createNotification({
+      user_id: userNew.user_id,
+      message:
+        "Your data is out of date, please click here or go to your profile and complete the registration.",
+      redirect: "/account/edit",
+      title: "Incomplete user information!",
+    });
+    await createNotification({
+      user_id: userNew.user_id,
+      message:
+        "It's a pleasure to have you with us! Enjoy our varieties and always live in urban style.",
+      redirect: "",
+      title: "Welcome to urban vogue!",
+    });
     await SetJwt({ id: userNew.user_id, req, res });
 
     res.redirect(successOAuth);
@@ -76,9 +85,8 @@ async function GithubOAuth(
     verify_email: true,
   });
 
-  
   res.redirect(successOAuth);
-  
+
   await SetJwt({ id: userNew.user_id, req, res });
   return;
 }
