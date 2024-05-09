@@ -9,7 +9,7 @@
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "start": "node build/src/server.js",
-    "install-build": "npm install && npm run build",
+    "install-build": "npm install && npm run build && npx sequelize-cli db:migrate",
     "vercel-build": "echo hello"
   },
   "keywords": [],
