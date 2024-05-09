@@ -1,10 +1,11 @@
 import dotenv from "dotenv";
 import app from "./app";
-import "./service/whatsapp-web/whatsapp-web.service"
+import cors from "cors";
+import "./service/whatsapp-web/whatsapp-web.service";
 dotenv.config();
 
 const PORT = process.env.PORT;
-
+app.use(cors());
 try {
   app.listen(PORT, () => {
     console.log(`Servidor rodando em ${PORT}`);
