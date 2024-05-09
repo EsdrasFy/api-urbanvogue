@@ -27,7 +27,7 @@ async function oauthMiddle(req: Request, res: Response, next: NextFunction) {
     }
    return res.status(200).json({msg: "Teste"})
   } catch (error:any) {
-    console.error(error.message);
+    console.error({msg: "OAUTH",error:error.message});
 }
 }
 
