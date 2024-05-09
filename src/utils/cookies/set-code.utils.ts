@@ -23,6 +23,8 @@ export async function SetCode({
     httpOnly: true,
     maxAge: 30 * 60 * 1000,
     path: "/",
+    secure: true,
+    sameSite: "none"
   });
   console.log({ name, data, user_id });
 

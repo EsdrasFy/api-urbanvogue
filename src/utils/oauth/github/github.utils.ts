@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import {
   CreateUser,
   createNotification,
@@ -10,7 +10,9 @@ import {
 import { GithubUserResult } from "../../../service/user/types";
 import { UserI } from "../../../interfaces/user.interface";
 import { SetJwt } from "../../cookies/set-jwt.utils";
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config()
+
 async function GithubOAuth(
   req: Request,
   res: Response,
