@@ -14,6 +14,7 @@ app.use(
         "https://urbanvogue.cloud/",
         "http://192.168.1.12:3000"
       ],
+      methods:['GET', 'POST', 'DELETE', 'PUT', 'PATCH']
     })
   );
   app.use(express.json());
