@@ -20,9 +20,7 @@ export async function SetCode({
 
   const cookies = new Cookies(req, res);
   cookies.set(name, JSON.stringify({ code, data, user_id }), {
-    httpOnly: true,
     maxAge: 30 * 60 * 1000,
-    path: "/",
   });
   console.log({ name, data, user_id });
 

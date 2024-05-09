@@ -12,7 +12,6 @@ export async function SetJwt({
   req: Request;
   res: Response;
 }) {
-  
   const secret = process.env.SECRET as string;
   const cookies = new Cookies(req, res);
   const token = jwt.sign({ id }, secret, {
@@ -22,13 +21,8 @@ export async function SetJwt({
   req.body.jwt = token;
 
   cookies.set("jwt", token, {
-    httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,
-    path: "/",
-    sameSite: "none", 
-    secure: true
   });
-  
-  
+
   return;
 }
