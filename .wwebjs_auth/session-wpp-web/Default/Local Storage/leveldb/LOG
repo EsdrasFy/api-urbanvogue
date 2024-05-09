@@ -1,6 +1,3 @@
-2024/05/09-11:19:20.209 2623 Reusing MANIFEST /home/esdras/Documentos/GitHub/api-urbanvogue/.wwebjs_auth/session-wpp-web/Default/Local Storage/leveldb/MANIFEST-000001
-2024/05/09-11:19:20.209 2623 Recovering log #29
-2024/05/09-11:19:20.209 2623 Reusing old log /home/esdras/Documentos/GitHub/api-urbanvogue/.wwebjs_auth/session-wpp-web/Default/Local Storage/leveldb/000029.log 
-2024/05/09-12:16:11.965 7cb6 Level-0 table #33: started
-2024/05/09-12:16:11.997 7cb6 Level-0 table #33: 22363 bytes OK
-2024/05/09-12:16:11.999 7cb6 Delete type=0 #29
+2024/05/09-14:53:58.704 c744 Reusing MANIFEST /home/esdras/Documentos/GitHub/api-urbanvogue/.wwebjs_auth/session-wpp-web/Default/Local Storage/leveldb/MANIFEST-000001
+2024/05/09-14:53:58.712 c744 Recovering log #32
+2024/05/09-14:53:58.712 c744 Reusing old log /home/esdras/Documentos/GitHub/api-urbanvogue/.wwebjs_auth/session-wpp-web/Default/Local Storage/leveldb/000032.log 
