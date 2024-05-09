@@ -50,7 +50,7 @@ async function validateCoupon(req: Request, res: Response) {
   const { code, ids } = req.body;
 
   try {
-    // Busca o cupom pelo código
+    
     const coupon: CouponI | null = (await ProductCouponM.findOne({
       where: { code },
     })) as CouponI | null;
@@ -60,19 +60,18 @@ async function validateCoupon(req: Request, res: Response) {
     }
 
     const currentDate = new Date();
-    // Busca os produtos pelos IDs
+
     const products: ProductI[] = (await ProductM.findAll({
       where: { id: ids },
       attributes: ["id", "category", "brand"],
     })) as ProductI[];
 
-    // Verifica a validade do cupom
     if (coupon.start_date && coupon.end_date) {
-      const start_date = new Date(coupon.start_date); // Convertendo para Date
-      const end_date = new Date(coupon.end_date); // Convertendo para Date
+      const start_date = new Date(coupon.start_date); 
+      const end_date = new Date(coupon.end_date);
 
       if (start_date <= currentDate && end_date >= currentDate) {
-        // Verifica se os produtos são válidos para o cupom
+       
         if (coupon.valid_brand !== null || coupon.valid_category !== null) {
           const valid = products.every((item) => {
             const categoryValid =
@@ -89,7 +88,6 @@ async function validateCoupon(req: Request, res: Response) {
           }
         }
 
-        // Retorna o cupom aplicado
         return res.status(200).json({
           status: 200,
           msg: "Coupon applied!",
@@ -106,10 +104,9 @@ async function validateCoupon(req: Request, res: Response) {
       }
     }
 
-    // Retorna se o cupom for inválido
     return res.status(401).json({ msg: "Invalid coupon!" });
   } catch (error) {
-    // Retorna erro interno em caso de exceção
+
     console.error(error);
     return res.status(500).json({ msg: "Internal Error." });
   }
