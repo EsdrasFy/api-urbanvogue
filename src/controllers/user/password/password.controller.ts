@@ -28,16 +28,12 @@ async function receiveEmail(req: Request, res: Response) {
     httpOnly: true,
     maxAge: 5 * 60 * 1000,
     path: "/",
-    secure: true,
-    sameSite: "none"
   });
 
   cookies.set("forgot_password", code, {
     httpOnly: true,
     maxAge: 1,
     path: "/",
-    secure: true,
-    sameSite: "none"
   });
 
   return res
@@ -79,8 +75,6 @@ async function resetPassword(req: Request, res: Response) {
         httpOnly: true,
         maxAge: 1,
         path: "/",
-        secure: true,
-        sameSite: "none"
       });
       return res
         .status(200)
