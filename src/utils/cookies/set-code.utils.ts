@@ -15,14 +15,18 @@ export async function SetCode({
   data: string;
   user_id: number;
 }): Promise<string> {
+
   let number = Math.floor(Math.random() * 1000000);
   let code = number.toString().padStart(6, "0");
 
   const cookies = new Cookies(req, res);
+
   cookies.set(name, JSON.stringify({ code, data, user_id }), {
     maxAge: 30 * 60 * 1000,
-  });
-  console.log({ name, data, user_id });
+    httpOnly: true,
+    secure: true,
+    path: "/"
+  })
 
   return code;
 }

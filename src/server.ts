@@ -1,18 +1,9 @@
 import dotenv from "dotenv";
 import app from "./app";
-import cors from "cors";
 import "./service/whatsapp-web/whatsapp-web.service";
 dotenv.config();
 
 const PORT = process.env.PORT;
-const corsOptions = {
-  origin: "*", // Allow requests from any origin
-  methods: ["GET", "OPTIONS", "PATCH", "DELETE", "POST", "PUT"],
-  allowedHeaders: ["X-CSRF-Token", "X-Requested-With", "Accept", "Accept-Version", "Content-Length", "Content-MD5", "Content-Type", "Date", "X-Api-Version"],
-  credentials: true
-};
-
-app.use(cors(corsOptions));
 
 try {
   app.listen(PORT, () => {

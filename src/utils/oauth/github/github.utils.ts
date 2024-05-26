@@ -85,10 +85,8 @@ async function GithubOAuth(req: Request, res: Response): Promise<any> {
     verify_email: true,
   });
 
-  res.redirect(successOAuth);
-
   await SetJwt({ id: userNew.user_id, req, res });
-  return;
+  res.redirect(successOAuth);
 }
 
 export { GithubOAuth };

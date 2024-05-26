@@ -31,8 +31,9 @@ async function UserChanges(req: Request, res: Response) {
     data: data,
     user_id: +user_id,
   });
-  const messageSms = `HI! 😃\nTo verify your number, copy and paste the code onto the website. To be safe, do not share it with other people.\n\n *Access code: ${code}*`;
   
+  const messageSms = `HI! 😃\nTo verify your number, copy and paste the code onto the website. To be safe, do not share it with other people.\n\n *Access code: ${code}*`;
+
   if (change === "email") {
     if (!data || typeof data !== "string") {
       return res.status(401).json({ msg: "Email is required." });

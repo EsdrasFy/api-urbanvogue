@@ -6,10 +6,20 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const corsOptions = {
-  origin: "*",
+  origin: ["http://localhost:3000", "https://urbanvogue.cloud"],
   methods: ["GET", "OPTIONS", "PATCH", "DELETE", "POST", "PUT"],
-  allowedHeaders: ["X-CSRF-Token", "X-Requested-With", "Accept", "Accept-Version", "Content-Length", "Content-MD5", "Content-Type", "Date", "X-Api-Version"],
-  credentials: true
+  allowedHeaders: [
+    "X-CSRF-Token",
+    "X-Requested-With",
+    "Accept",
+    "Accept-Version",
+    "Content-Length",
+    "Content-MD5",
+    "Content-Type",
+    "Date",
+    "X-Api-Version",
+  ],
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
