@@ -86,7 +86,8 @@ async function GithubOAuth(req: Request, res: Response): Promise<any> {
   });
 
   await SetJwt({ id: userNew.user_id, req, res });
-  res.redirect(successOAuth);
+  return res.redirect(successOAuth);
+  
 }
 
 export { GithubOAuth };

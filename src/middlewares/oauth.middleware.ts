@@ -23,7 +23,7 @@ async function oauthMiddle(req: Request, res: Response, next: NextFunction) {
       return await GoogleOAuth(req, res);
     }
     if (provider === "github") {
-      return await GithubOAuth(req, res);
+       await GithubOAuth(req, res);
     }
    return res.status(200).json({msg: "Teste"})
   } catch (error:any) {
