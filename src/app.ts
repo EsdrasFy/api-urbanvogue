@@ -3,26 +3,22 @@ import { routes } from "./routes";
 import cors from "cors";
 const app: Application = express();
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 dotenv.config();
 
-const corsOptions = {
-  origin: ["http://localhost:3000", "https://urbanvogue.cloud"],
-  methods: ["GET", "OPTIONS", "PATCH", "DELETE", "POST", "PUT"],
-  allowedHeaders: [
-    "X-CSRF-Token",
-    "X-Requested-With",
-    "Accept",
-    "Accept-Version",
-    "Content-Length",
-    "Content-MD5",
-    "Content-Type",
-    "Date",
-    "X-Api-Version",
-  ],
-  credentials: true,
-};
+app.use(cookieParser());
 
-app.use(cors(corsOptions));
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://github.com",
+  "https://login-esdras.vercel.app",
+];
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(routes);

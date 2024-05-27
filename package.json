@@ -17,6 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.7",
     "@types/cookies": "^0.9.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
@@ -39,7 +40,6 @@
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
-    "cookies": "^0.9.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.3",
@@ -50,12 +50,12 @@
     "nodemailer": "^6.9.13",
     "puppeteer": "^22.4.1",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.23.0",
     "sequelize": "^6.37.1",
     "superagent": "^9.0.2",
     "supertest": "^6.3.4",
     "ts-node": "^10.9.2",
     "twilio": "^5.0.4",
-    "uui": "^1.0.7"
+    "uui": "^1.0.7",
+    "whatsapp-web.js": "^1.23.0"
   }
 }
