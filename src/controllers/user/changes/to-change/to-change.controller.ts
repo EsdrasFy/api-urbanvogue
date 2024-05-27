@@ -1,4 +1,3 @@
-import Cookies from "cookies";
 import { Request, Response } from "express";
 import {
   changeEmail,
@@ -9,8 +8,7 @@ import bcrypt from "bcrypt";
 
 async function toChange(req: Request, res: Response) {
   const { change } = req.query;
-  const cookies = new Cookies(req, res);
-  const codeCookie = cookies.get(change as string) as string | undefined;
+  const codeCookie = req.cookies.get(change as string) as string | undefined;
 
   let cookieData;
   if (!codeCookie) {
