@@ -17,6 +17,10 @@
         },
         {
           "key": "Access-Control-Allow-Origin",
+          "value": "https://github.com"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
           "value": "https://urbanvogue.cloud"
         },
         {
