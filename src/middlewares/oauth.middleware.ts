@@ -4,9 +4,7 @@ import { OAuthGithub } from "../controllers/oauth/oauth-github/oauth-github.cont
 const OAuth = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.jwt;
   if (token) {
-    // validar o jwt do cookies
-    console.log("Logado: " + token);
-    next();
+    return res.status(200).json(token);
   }
 
   const { provider } = req.query;
