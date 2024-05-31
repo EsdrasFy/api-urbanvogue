@@ -57,11 +57,7 @@ import { codeReceived } from "./middlewares/code-received.middeware";
 import { createNotifications, getNotifications, updateNotifications } from "./controllers/user/notify/notify-controller";
 
 // Rotas para o usuário
-routes.put("/user/update", updateUser);
-routes.delete("/user/delete/:id", deleteUser);
-routes.post("/user/changes", UserChanges);
-routes.get("/user/changes", codeReceived, toChange);
-routes.post("/register/:type", register);
+
 
 routes.get("/show/:id", readUser);
 
