@@ -54,7 +54,7 @@ function startClient(id: string): void {
   });
 }
 
-startClient("wpp-web");
+// startClient("wpp-web");
 
 async function sendMessage(
   phoneNumber: string,

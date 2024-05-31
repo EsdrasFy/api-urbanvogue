@@ -8,7 +8,7 @@ import bcrypt from "bcrypt";
 
 async function toChange(req: Request, res: Response) {
   const { change } = req.query;
-  const codeCookie = req.cookies.get(change as string) as string | undefined;
+  const codeCookie = req.cookies.get.change;
 
   let cookieData;
   if (!codeCookie) {
@@ -24,7 +24,7 @@ async function toChange(req: Request, res: Response) {
     });
 
     if (changed.status === 200) {
-      cookies.set(change, "", { expires: new Date(0), path: "/" });
+      res.cookie(change, "", { expires: new Date(0), path: "/" });
     }
     return res
       .status(changed.status)
@@ -38,7 +38,7 @@ async function toChange(req: Request, res: Response) {
     });
 
     if (changed.status === 200) {
-      cookies.set(change, "", { expires: new Date(0), path: "/" });
+      res.cookie(change, "", { expires: new Date(0), path: "/" });
     }
     return res
       .status(changed.status)
@@ -55,12 +55,10 @@ async function toChange(req: Request, res: Response) {
     });
 
     if (changed.status === 200) {
-      cookies.set(change, "", { expires: new Date(0), path: "/" });
+      res.cookie(change, "", { expires: new Date(0), path: "/" });
     }
 
-    return res
-      .status(changed.status)
-      .json({ msg: changed.msg });
+    return res.status(changed.status).json({ msg: changed.msg });
   }
 }
 

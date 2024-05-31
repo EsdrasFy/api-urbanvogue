@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import app from "./app";
-import "./service/whatsapp-web/whatsapp-web.service";
+// import "./service/whatsapp-web/whatsapp-web.service";
 import cors from "cors"
 import cookieParser from "cookie-parser";
 dotenv.config();

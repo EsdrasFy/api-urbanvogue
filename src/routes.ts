@@ -8,7 +8,6 @@ import {
   updateUser,
   readUser,
 } from "./controllers/user/crud/user-crud.controller";
-import { login } from "./controllers/user/login/login.controller";
 import {
   deleteAddress,
   createAddress,
@@ -43,7 +42,6 @@ import {
   createComment,
 } from "./controllers/product/comment/comment.controller";
 import { credentialMiddle } from "./middlewares/credential.middleware";
-import { oauthMiddle } from "./middlewares/oauth.middleware";
 import { register } from "./controllers/user/register/register.controller";
 import { findPayment } from "./controllers/payment/find/payment.find.controller";
 import { paymentMiddle } from "./middlewares/payment.middleware";
@@ -63,8 +61,6 @@ routes.put("/user/update", updateUser);
 routes.delete("/user/delete/:id", deleteUser);
 routes.post("/user/changes", UserChanges);
 routes.get("/user/changes", codeReceived, toChange);
-routes.post("/login/credentials", credentialMiddle, login);
-routes.get("/login/oauth", oauthMiddle);
 routes.post("/register/:type", register);
 
 routes.get("/show/:id", readUser);
