@@ -9,7 +9,7 @@ const config: Options = {
   port: 37488,
   dialect: "mysql",
   dialectModule: require("mysql2"),
-  logging: true,
+  logging: process.env.NODE_ENV === "production",
 };
 
 export = config;
