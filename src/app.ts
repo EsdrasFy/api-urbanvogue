@@ -12,7 +12,7 @@ dotenv.config();
 const allowedOrigins = [
   "http://localhost:3000",
   "https://github.com",
-  "https://login-esdras.vercel.app",
+  "https://urbanvogue.cloud",
 ];
 
 app

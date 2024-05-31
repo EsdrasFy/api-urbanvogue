@@ -7,14 +7,6 @@ dotenv.config();
 app.use(cookieParser());
 const PORT = process.env.PORT;
 
-const allowedOrigins = ["http://localhost:3000", "https://github.com", "https://urbanvogue.cloud"];
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
-
 try {
   app.listen(PORT, () => {
     console.log(`Servidor rodando em ${PORT}`);
